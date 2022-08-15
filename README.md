@@ -4,19 +4,9 @@
 
 ## 分支
 
-开发者建立 `dev-username` 分支，并在每次书写代码前合并 `dev` 开发分支代码。
 
 `main` 分支用于正式库打包，`dev` 分支用于测试库打包。
 
-## CI/CD
-
-略，之后填写。
-
-## 环境
-
-该项目以 Antd Pro&Umi 为大框架，并使用 `react-quill` 处理富文本框、`react-copy-to-clipboard` 处理鼠标键盘复制。
-
-# 运行
 
 ## 克隆
 
@@ -24,21 +14,6 @@
 git clone https://github.com/DelinquentLeon/shixunProject.git
 ```
 
-## 安装依赖
-
-```bash
-npm install
-```
-
-该项目依托于 Antd Pro，因此依赖包较为庞大，可能需要执行一段时间。但是可以使用 Antd Pro 推荐的 `tyarn` 进行安装：
-
-```bash
-npm install yarn tyarn -g
-```
-
-```bash
-tyarn install
-```
 
 ## 切换分支
 
@@ -72,12 +47,6 @@ git push origin
 
 1. 缩进采用制表符 tab。
 2. 缩进采用 4 格空格，看的更加清楚一些。
-
-### 引号
-
-参考 `.eslintrc.js`
-
-1. 采用单引号
 
 ### 分号
 
