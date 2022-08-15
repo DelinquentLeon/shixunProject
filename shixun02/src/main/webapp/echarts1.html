@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>第一个 ECharts 实例</title>
+<!-- 引入 echarts.js -->
+<script src="https://cdn.staticfile.org/echarts/4.3.0/echarts.min.js"></script>
+<!-- 新 Bootstrap5 核心 CSS 文件 -->
+<link rel="stylesheet"
+	href="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/css/bootstrap.min.css">
+
+<!--  popper.min.js 用于弹窗、提示、下拉菜单 -->
+<script
+	src="https://cdn.staticfile.org/popper.js/2.9.3/umd/popper.min.js"></script>
+
+<!-- 最新的 Bootstrap5 核心 JavaScript 文件 -->
+<script
+	src="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/js/bootstrap.min.js"></script>
+<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+<script type="text/javascript"
+	src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<style type="text/css">
+#main01 {
+	height: 400px;
+}
+
+#main02 {
+	height: 400px;
+}
+
+#panel, #flip {
+	padding: 5px;
+	text-align: center;
+	background-color: #e5eecc;
+	border: solid 1px #c3c3c3;
+}
+
+#panel {
+	padding: 50px;
+	display: none;
+}
+</style>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#flip").click(function() {
+			$("#row").slideToggle("slow");
+		});
+	});
+</script>
+</head>
+<body>
+
+	<div id="flip">点我，显示或隐藏面板。</div>
+	<div class="row" id="row">
+		<div class="col-sm-4" id="main01">.col-sm-4</div>
+		<div class="col-sm-4">.col-sm-4</div>
+		<div class="col-sm-4" id="main02">.col-sm-4</div>
+	</div>
+
+	<div id="app">
+		<!-- `greet` 是在下面定义的方法名 -->
+		<button type="button" class="btn btn-success" v-on:click="greet">查看男女的数量</button>
+
+	</div>
+
+	<script type="text/javascript">
+		// 基于准备好的dom，初始化echarts实例
+		var myChart01 = echarts.init(document.getElementById('main01'));
+		var myChart02 = echarts.init(document.getElementById('main02'));
+		
+		// 指定图表的配置项和数据
+		var option01 = {
+			title : {
+				text : '男女的数量'
+			},
+			tooltip : {},
+			legend : {
+				data : [ '数量' ]
+			},
+			xAxis : {
+				data : [ "男", "女" ]
+			},
+			yAxis : {},
+			series : [ {
+				name : '数量',
+				type : 'bar',
+				data : [0,0]
+			} ]
+		};
+		//option01.series[0].data
+		option02 = {
+			tooltip : {
+				trigger : 'item'
+			},
+			legend : {
+				top : '5%',
+				left : 'center'
+			},
+			series : [ {
+				name : 'Access From',
+				type : 'pie',
+				radius : [ '40%', '70%' ],
+				avoidLabelOverlap : false,
+				itemStyle : {
+					borderRadius : 10,
+					borderColor : '#fff',
+					borderWidth : 2
+				},
+				label : {
+					show : false,
+					position : 'center'
+				},
+				emphasis : {
+					label : {
+						show : true,
+						fontSize : '40',
+						fontWeight : 'bold'
+					}
+				},
+				labelLine : {
+					show : false
+				},
+				data : [ {
+					value : 1048,
+					name : 'Search Engine'
+				}, {
+					value : 735,
+					name : 'Direct'
+				}, {
+					value : 580,
+					name : 'Email'
+				}, {
+					value : 484,
+					name : 'Union Ads'
+				}, {
+					value : 300,
+					name : 'Video Ads'
+				} ]
+			} ]
+		};
+		// 使用刚指定的配置项和数据显示图表。
+		//myChart01.setOption(option01);
+		myChart02.setOption(option02);
+
+		var app = new Vue({
+			el : '#app',
+			data : {
+				name : 'Vue.js'
+			},
+			// 在 `methods` 对象中定义方法
+			methods : {
+				greet : function() {
+					console.log("进入了greet方法！");
+					 axios
+				      .get('getSexNum')
+				      .then(function (response){
+				    	  console.log("进入了ajax方法！");
+			    		  option01.series[0].data=response.data;
+			    		  //重新渲染一下echars图
+			    		  myChart01.setOption(option01);
+				      }
+
+				  		)
+				      .catch(function (error) { // 请求失败处理
+				        console.log(error);
+				      });
+				}
+			}
+		})
+		// 也可以用 JavaScript 直接调用方法
+		//app.greet() // -> 'Hello Vue.js!'
+	</script>
+</body>
+</html>
