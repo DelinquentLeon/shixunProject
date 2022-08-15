@@ -21,7 +21,7 @@
 ## 克隆
 
 ```bash
-git clone https://github.com/Yucohny/TMIS.git
+git clone https://github.com/DelinquentLeon/shixunProject.git
 ```
 
 ## 安装依赖
