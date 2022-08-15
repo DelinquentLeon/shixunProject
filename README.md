@@ -1,11 +1,11 @@
 # 项目
 
-本仓库为 重庆大学实现 github 仓库。
+本仓库为 重庆大学实训 github 仓库。
 
 ## 分支
 
 
-`main` 分支用于正式库打包，`dev` 分支用于测试库打包。
+`main` 分支用于正式库打包
 
 
 ## 克隆
@@ -18,7 +18,7 @@ git clone https://github.com/DelinquentLeon/shixunProject.git
 ## 切换分支
 
 ```bash
-git checkout dev-username
+git checkout bran-username
 ```
 
 ## push
@@ -41,12 +41,6 @@ git push origin
 
 ## 代码规范
 
-### 缩进
-
-参考 `.editorconfig`
-
-1. 缩进采用制表符 tab。
-2. 缩进采用 4 格空格，看的更加清楚一些。
 
 ### 分号
 
