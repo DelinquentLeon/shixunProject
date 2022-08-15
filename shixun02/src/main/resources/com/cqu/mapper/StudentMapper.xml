@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cqu.mapper.StudentMapper">
+  
+  	<!-- insert with mapper id与同名java的方法同名 -->
+  	<insert id="addStudentWithMapper" parameterType="com.cqu.pojo.Student">
+  		insert into `student`(`number`,`name`,`sex`,`major`,`age`,`province`,`hobby`)
+	values (#{number},#{name},#{sex},#{major},#{age},#{province},#{hobby});
+  	</insert>
+
+  	<delete id="deleteStudent" parameterType="int">
+  		delete from `student` where number=#{number}
+  	</delete>
+	
+	<update id="updateStudent" parameterType="com.cqu.pojo.Student">
+		update `student` set `number`=#{number},`name`=#{name},
+		`sex`=#{sex},`major`=#{major},`age`=#{age},`province`=#{province},`hobby`=#{hobby}  
+		where number=#{number};
+	</update>
+	
+	<select id="findAllStudent" resultType="com.cqu.pojo.Student">
+		select * from student;
+	</select>
+
+	<select id="findStudentByNumber" parameterType="int" resultType="com.cqu.pojo.Student">
+		select * from student where number=#{number};
+	</select>
+	
+	<!-- 查询某个学科的学生 -->
+	<!-- <select id="findAllStudentByProfession" parameterType="int" resultMap="allStudent_Profession">
+		select * from profession,student
+		where student.profession_id =profession.id and profession.id=#{profession_id};
+	</select> -->
+	
+	<!-- 手动映射结果集 -->
+	<!-- <resultMap type="project.pojo.Student" id="allStudent_Profession">
+		<id column="id" property="id"/>
+		<result column="username" property="username"/>
+		<result column="password" property="password"/>
+		<result column="sex" property="sex"/>
+		<result column="phone" property="phone"/>
+		<result column="profession_id" property="profession_id"/>
+		<result column="address" property="address"/>
+		<result column="date" property="date"/>
+		
+		<association property="profession" javaType="project/pojo/Profession.java">
+			<id column="profession_id" property="id"/>
+			<result column="pro_name" property="pro_name"/>
+		</association>
+	</resultMap>
+	 -->
+	 
+	 
+	<!-- 由性别查看学生数量 -->
+	<select id="countSexNumber" parameterType="string" resultType="int">
+		select count(*) from student where sex=#{sex};
+	</select>
+	
+	<!-- 专业查看学生数量 -->
+	<select id="countMajorNumber" parameterType="string" resultType="int">
+		select count(*) from student where major=#{major};
+	</select>
+	
+	<!-- 由年龄查看学生数量 -->
+	<select id="countAgeNumber" resultType="int">
+		select count(*) from student where age>=#{age1} and #{age2}>=age;
+	</select>
+	
+	<!-- 由省份查看学生数量 -->
+	<select id="countProvinceNumber" parameterType="string" resultType="int">
+		select count(*) from student where province=#{province};
+	</select>
+	
+	<!-- 由兴趣查看学生数量 -->
+	<select id="countHobbyNumber" parameterType="string" resultType="int">
+		select count(*) from student where hobby=#{hobby};
+	</select>
+
+</mapper>
