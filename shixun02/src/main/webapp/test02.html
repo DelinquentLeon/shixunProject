@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="res/style.css">
+		<script src="https://cdn.staticfile.org/echarts/4.3.0/echarts.min.js"></script>
+		<script src=" https://www.makeapie.cn/dep/echarts/map/js/china.js"></script>
+		<!-- 新 Bootstrap5 核心 CSS 文件 -->
+		<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/css/bootstrap.min.css">
+		 
+		<!--  popper.min.js 用于弹窗、提示、下拉菜单 -->
+		<script src="https://cdn.staticfile.org/popper.js/2.9.3/umd/popper.min.js"></script>
+		 
+		<!-- 最新的 Bootstrap5 核心 JavaScript 文件 -->
+		<script src="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/js/bootstrap.min.js"></script>
+		<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+		<script type="text/javascript"
+		src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+		<title>数据界面</title>
+	</head>
+	<body class="fill-parent" dg-chart-auto-resize="true"
+		dg-chart-options="{title:{show:false},legend:{top:0},grid:{top:25}}"
+		dg-chart-theme="{color:'#F0F0F0',actualBackgroundColor:'#142233'}">
+		<div class="head">
+			<div class="title"><label style="color: white;">重庆大学计算机学院报到新生情况</label></div>
+		</div>
+		<div class="content">
+			<div class="layout layout-left-top">
+				<div class="panel panel-bg no-title-bg">
+					<div class="title"><label>男女占比</label></div>
+					<div class="chart" dg-chart-widget="">
+						<div id="nannv" style="width:100%;height:100%;"><!--自定义--></div>
+						<!-- <div id="main" style="width: 600px;height:400px;"></div> -->
+						    <script type="text/javascript">
+						    	var Chart = echarts.init(document.getElementById('nannv'));
+						                var symbols = [
+						                    'path://M18.2629891,11.7131596 L6.8091608,11.7131596 C1.6685112,11.7131596 0,13.032145 0,18.6237673 L0,34.9928467 C0,38.1719847 4.28388932,38.1719847 4.28388932,34.9928467 L4.65591984,20.0216948 L5.74941883,20.0216948 L5.74941883,61.000787 C5.74941883,65.2508314 11.5891201,65.1268798 11.5891201,61.000787 L11.9611506,37.2137775 L13.1110872,37.2137775 L13.4831177,61.000787 C13.4831177,65.1268798 19.3114787,65.2508314 19.3114787,61.000787 L19.3114787,20.0216948 L20.4162301,20.0216948 L20.7882606,34.9928467 C20.7882606,38.1719847 25.0721499,38.1719847 25.0721499,34.9928467 L25.0721499,18.6237673 C25.0721499,13.032145 23.4038145,11.7131596 18.2629891,11.7131596 M12.5361629,1.11022302e-13 C15.4784742,1.11022302e-13 17.8684539,2.38997966 17.8684539,5.33237894 C17.8684539,8.27469031 15.4784742,10.66467 12.5361629,10.66467 C9.59376358,10.66467 7.20378392,8.27469031 7.20378392,5.33237894 C7.20378392,2.38997966 9.59376358,1.11022302e-13 12.5361629,1.11022302e-13',
+						                    'path://M28.9624207,31.5315864 L24.4142575,16.4793596 C23.5227152,13.8063773 20.8817445,11.7111088 17.0107398,11.7111088 L12.112691,11.7111088 C8.24168636,11.7111088 5.60080331,13.8064652 4.70917331,16.4793596 L0.149791395,31.5315864 C-0.786976655,34.7595013 2.9373074,35.9147532 3.9192135,32.890727 L8.72689855,19.1296485 L9.2799493,19.1296485 C9.2799493,19.1296485 2.95992025,43.7750224 2.70031069,44.6924335 C2.56498417,45.1567684 2.74553639,45.4852068 3.24205501,45.4852068 L8.704461,45.4852068 L8.704461,61.6700801 C8.704461,64.9659872 13.625035,64.9659872 13.625035,61.6700801 L13.625035,45.360657 L15.5097899,45.360657 L15.4984835,61.6700801 C15.4984835,64.9659872 20.4191451,64.9659872 20.4191451,61.6700801 L20.4191451,45.4852068 L25.8814635,45.4852068 C26.3667633,45.4852068 26.5586219,45.1567684 26.4345142,44.6924335 C26.1636859,43.7750224 19.8436568,19.1296485 19.8436568,19.1296485 L20.3966199,19.1296485 L25.2043926,32.890727 C26.1862111,35.9147532 29.9105828,34.7595013 28.9625083,31.5315864 L28.9624207,31.5315864 Z M14.5617154,0 C17.4960397,0 19.8773132,2.3898427 19.8773132,5.33453001 C19.8773132,8.27930527 17.4960397,10.66906 14.5617154,10.66906 C11.6274788,10.66906 9.24611767,8.27930527 9.24611767,5.33453001 C9.24611767,2.3898427 11.6274788,0 14.5617154,0 L14.5617154,0 Z',
+						                    'path://M512 292.205897c80.855572 0 146.358821-65.503248 146.358821-146.358821C658.358821 65.503248 592.855572 0 512 0 431.144428 0 365.641179 65.503248 365.641179 146.358821 365.641179 227.214393 431.144428 292.205897 512 292.205897zM512 731.282359c-80.855572 0-146.358821 65.503248-146.358821 146.358821 0 80.855572 65.503248 146.358821 146.358821 146.358821 80.855572 0 146.358821-65.503248 146.358821-146.358821C658.358821 796.273863 592.855572 731.282359 512 731.282359z'
+						                ];
+						                var bodyMax = 100//指定图形界限的值
+						                        var labelSetting = {
+						                            normal: {
+						                                show: false,
+						                                position: 'bottom',
+						                                offset: [0, 10],
+						                                formatter: function (param) {
+						                                    return (param.value / bodyMax * 100).toFixed(0) + '%';
+						                                },
+						                                textStyle: {
+						                                    fontSize: 18,
+						                                    fontFamily: 'Arial',
+						                                    color: '#686868'
+						                                }
+						                            }
+						                        };
+						                        var markLineSetting = { //设置标线
+						                            symbol: 'none',
+						                            lineStyle: {
+						                                normal: {
+						                                    opacity: 0.3
+						                                }
+						                            },
+						                            data: [{
+						                                type: 'max',
+						                                label: {
+						                                    normal: {
+						                                        formatter: 'max: {c}'
+						                                    }
+						                                }
+						                            }, {
+						                                type: 'min',
+						                                label: {
+						                                    normal: {
+						                                        formatter: 'min: {c}'
+						                                    }
+						                                }
+						                            }]
+						                        };
+						                        var option = {
+						                            
+						                            grid: {
+						                                // left: '20%',
+						                                // right: '20%',
+						                                top: '8%',
+						                                bottom: '0',
+						                                left: '1%',
+						                                right: '1%',
+						                                containLabel: true
+						                            },
+						                            xAxis: {
+						                                data: ['男', '女'],
+						                                axisTick: {
+						                                    show: false
+						                                },
+						                                axisLine: {
+						                                    show: false
+						                                },
+						                                axisLabel: {
+						                                    show: true,
+						                                    textStyle: {
+						                                        color: '#fff',
+						                                        fontSize: '15'
+						                                    },
+						                                }
+						                            },
+						                            yAxis: {
+														max:bodyMax,
+						                                splitLine: {
+						                                    show: false
+						                                },
+						                                axisTick: {
+						                                    // 刻度线
+						                                    show: false
+						                                },
+						                                axisLine: {
+						                                    // 轴线
+						                                    show: false
+						                                },
+						                                axisLabel: {
+						                                    show: true,
+						                                    textStyle: {
+						                                        color: '#00badb',
+						                                        fontSize: '15'
+						                                    },
+						                                },
+						                                splitLine: {
+						                                    lineStyle: {
+						                                        color: '#393d60'
+						                                    },
+						                                }
+						                            },
+						                            tooltip: {
+						                                show: true,
+						                                trigger: 'axis',
+						                                formatter: '{b}:{c}%',
+						                                textStyle: {
+						                                    color: '#ffffff',
+						                                    fontSize: '15'
+						                                },
+						                                axisPointer: {
+						                                    type: 'none',
+						                                }
+						                            },
+						                            series: [
+						                                {
+						                                    name: '男女比例',
+						                                    type: 'pictorialBar',
+						                                    symbolClip: true,
+						                                    symbolBoundingData: bodyMax,
+						                                    label: labelSetting,
+						                                    barWidth: '75',
+						                                    data: [
+						                                        {
+						                                            value: 35,
+						                                            symbol: symbols[0],
+						                                            itemStyle: {
+						                                                normal: {
+						                                                    color: 'rgba(105,204,230)' //单独控制颜色
+						                                                },
+																		emphasis: {
+																		    color: 'rgba(105,204,230)' //单独控制颜色
+																		}
+						                                            }
+						                                        },
+						                                        {
+						                                            value: 65,
+						                                            symbol: symbols[1],
+						                                            itemStyle: {
+						                                                normal: {
+						                                                    color: 'rgb(255,128,98)' //单独控制颜色
+						                                                }
+						                                            }
+						                                        }],
+						                                    // markLine: markLineSetting,
+						                                    z: 10
+						                                },
+						                                {
+						                                    // 设置背景底色，不同的情况用这个
+						                                    name: 'full',
+						                                    type: 'pictorialBar', //异型柱状图 图片、SVG PathData
+						                                    symbolBoundingData: bodyMax,
+						                                    animationDuration: 0,
+															barWidth: '75',
+						                                    // barWidth: chartsRelativeSize(3.2, 'r'),
+						                                    itemStyle: {
+						                                        normal: {
+						                                            color: '#ccc' //设置全部颜色，统一设置
+						                                        }
+						                                    },
+						                                    z: 10,
+						                                    data: [{
+						                                        itemStyle: {
+						                                            normal: {
+						                                                color: 'rgba(105,204,230,0.30)' //单独控制颜色
+						                                            }
+						                                        },
+						                                        value: 100,
+						                                        symbol: symbols[0]
+						                                    },
+						                                        {
+						                                            itemStyle: {
+						                                                normal: {
+						                                                    color: 'rgba(255,128,98,0.30)' //单独控制颜色
+						                                                }
+						                                            },
+						                                            value: 100,
+						                                            symbol: symbols[1]
+						                                        }
+						                                    ]
+						                                }
+						                            ]
+						                        };
+						    
+						        Chart.setOption(option);
+						    </script>
+					</div>
+				</div>
+			</div>
+			<div class="layout layout-left-center">
+				<div class="panel">
+					<div class="title"><label>排名统计</label></div>
+					<div class="chart" dg-chart-widget="">
+						<div id="fenbu7" style="width:100%;height:100%;"></div>
+						<script type="text/javascript">
+							var Chart07 = echarts.init(document.getElementById('fenbu7'));
+							let resultData = {
+							  status: 'success',
+							  data: [
+							    {
+							      name: '湖北',
+							      value: 4,
+							    },
+								{
+								  name: '重庆',
+								  value: 124,
+								},
+							    {
+							      name: '湖南',
+							      value: 24,
+							    },
+								
+								
+							    
+							  ],
+							  msg: 'exercitation in',
+							};
+							
+							//  颜色渐变函数 前四个参数分别表示四个位置依次为左、下、右、上
+							let colorList = [
+							  new echarts.graphic.LinearGradient(0, 0, 1, 1, [
+							      {
+							        offset: 0,
+							        color: 'rgba(59, 181, 182, 1)',
+							      },
+							      {
+							        offset: 1,
+							        color: 'rgba(66, 227, 151, 0.2)',
+							      },
+							    ]),
+							    new echarts.graphic.LinearGradient(1, 0, 0, 1, [
+							      {
+							        offset: 0,
+							        color: 'rgba(254, 220, 69, 1)',
+							      },
+							      {
+							        offset: 1,
+							        color: 'rgba(251, 112, 153, 0.2)',
+							      },
+							    ]),
+							    new echarts.graphic.LinearGradient(0, 1, 1, 0, [
+							      {
+							        offset: 0,
+							        color: 'rgba(0, 138, 255, 1)',
+							      },
+							      {
+							        offset: 1,
+							        color: 'rgba(0, 216, 255, 0.2)',
+							      },
+							    ]),
+							    new echarts.graphic.LinearGradient(0, 0, 1, 1, [
+							      {
+							        offset: 0,
+							        color: 'rgba(246, 191, 159, 1)',
+							      },
+							      {
+							        offset: 1,
+							        color: 'rgba(219, 138, 222, 0.2)',
+							      },
+							    ]),
+							    new echarts.graphic.LinearGradient(1, 0, 0, 1, [
+							      {
+							        offset: 0,
+							        color: 'rgba(247, 138, 158, 1)',
+							      },
+							      {
+							        offset: 0.5,
+							        color: 'rgba(245, 111, 135, 0.5)',
+							      },
+							      {
+							        offset: 1,
+							        color: 'rgba(254, 152, 139, 0.2)',
+							      },
+							    ]),
+							  
+							];
+							let colorListLen = colorList.length;
+							
+							// 生成随机坐标的不重叠圆
+							function drawCircles(maxLength, radius, max_x, max_y) {
+							  let circles = [];
+							  let anti_crash_count = 0;
+							  while (circles.length < maxLength) {
+							    let circle = {
+							      x: getRandomNumber(radius, max_x - radius),
+							      y: getRandomNumber(radius, max_y - radius),
+							      radius,
+							    };
+							
+							    let isOverlapping = false;
+							    let num = 0;
+							
+							    for (let j = 0; j < circles.length; j++) {
+							      let previous_circle = circles[j];
+							      let distance = Math.hypot(circle.x - previous_circle.x, circle.y - previous_circle.y);
+							
+							      while (distance < circle.radius + previous_circle.radius) {
+							          let circle = {
+							            x: getRandomNumber(radius, max_x - radius),
+							            y: getRandomNumber(radius, max_y - radius),
+							            radius,
+							          };
+									  num++;
+									  if(num>100) break;
+									  
+							      }
+							    }
+								circles.push(circle);
+							    // if (!isOverlapping) {
+							    //   circles.push(circle);
+							    // }
+							    anti_crash_count++;
+							    if (anti_crash_count > 10000) {
+							      break;
+							    }
+							  }
+							  return circles;
+							}
+							
+							// 生成随机数坐标
+							function getRandomNumber(min, max) {
+							  return Math.floor(Math.random() * (max - min) + min);
+							}
+							// 数据数组
+							let countList = resultData.data;
+							var showData = [];
+							var sum = 0,
+							  max = 0;
+							countList.forEach((e, i) => {
+							  e.id = i;
+							  e.label = {
+							    normal: {
+							      show: true,
+							      color: '#fff',
+							    },
+							  };
+							  e.itemStyle = {
+							    normal: {
+							      color: colorList[Math.floor(Math.random() * colorListLen)],
+							      shadowBlur: 16,
+							      shadowOffsetY: 16,
+							      shadowColor: 'rgba(0,0,0,0.1)',
+							    },
+							  };
+							  sum += e.value;
+							  if (e.value >= max) max = e.value;
+							});
+							// 放大规则
+							var number = Math.round(max * 0.5);
+							let graphCanvas = document.getElementById('fenbu7').getBoundingClientRect();
+							let randomCircleArr = drawCircles(
+							  countList.length,
+							  ((max + number) / max) * 40,
+							  graphCanvas.width,
+							  graphCanvas.height
+							);
+							countList.forEach((e, i) => {
+							  if (randomCircleArr[i]) {
+							    e.x = randomCircleArr[i].x;
+							    e.y = randomCircleArr[i].y;
+							    e.symbolSize = ((e.value + number) / max) * 40;
+							    e.label.normal.fontSize = ((e.value + number) / max) * 15;
+							  } else {
+							    e.symbolSize = 0;
+							    e.x = 0;
+							    e.y = 0;
+							  }
+							});
+							option07 = {
+							  title: {},
+							  tooltip: {
+							    trigger: 'item',
+							    formatter: function (params) {
+							      if (params['data']['name'] !== '') {
+							        return '<b>' + params['data']['name'] + '</b>：<b>' + params['data']['value'] + ' </b>';
+							      }
+							    },
+							  },
+							  series: [
+							    {
+							      name: '词条分布',
+							      type: 'graph',
+							      layout: 'none',
+							      label: {
+							        show: true,
+							        normal: {
+							          color: '#fff',
+							        },
+							      },
+							      data: countList,
+							    },
+							  ],
+							};
+
+							Chart07.setOption(option07);
+							</script>
+					</div>
+				</div>
+			</div>
+			<div class="layout layout-left-bottom">
+				<div class="panel">
+					<div class="title"><label>年龄占比</label></div>
+					<div class="chart" dg-chart-widget="">
+						<div id="fenbu" style="width:100%;height:100%;"><!--自定义--></div>
+						<script type="text/javascript">
+							var Chart02 = echarts.init(document.getElementById('fenbu'));
+						            var option02 = {
+						              tooltip: {
+						                trigger: 'item',
+										formatter: '{a} <br/>{b} : {c} ({d}%)'
+						              },
+						              legend: {
+										show:true,
+										padding:[0,-50,0,0],
+										align: "left",
+										x: 'left', //居右显示
+										orient: "vertical",
+						                top: '5%',
+										textStyle:{
+											color:'white'
+										}
+						              },
+						              series: [
+						                {
+						                  name: '年龄：',
+						                  type: 'pie',
+										  // top:'10%',
+						                  radius: ['40%', '70%'],
+						                  avoidLabelOverlap: false,
+						                  itemStyle: {
+						                    borderRadius: 10,
+						                    borderColor: '#fff',
+						                    borderWidth: 2
+						                  },
+						                  label: {
+						                    show: true,
+											formatter: '{d}%',
+						                    position: 'inside'
+						                  },
+						                  emphasis: {
+						                    label: {
+						                      show: true,
+						                      fontSize: '10',
+						                      fontWeight: 'bold'
+						                    }
+						                  },
+						                  labelLine: {
+						                    show: false
+						                  },
+						                  data: [
+						                    { value: 1048, name: '15岁及以下' },
+						                    { value: 735, name: '16-18岁' },
+						                    { value: 580, name: '18-22岁' },
+						                    { value: 484, name: '22-25岁' },
+						                    { value: 300, name: '25岁及以上' }
+						                  ]
+						                }
+						              ]
+						            };
+						
+						    Chart02.setOption(option02);
+						</script>
+					</div>
+				</div>
+			</div>
+			<div class="layout layout-center">
+				<div class="layout layout-center-main">
+					<div class="layout layout-center-top">
+						<div class="panel no-title-bg">
+							<div class="title"><label>男女人数</label></div>
+							<div class="chart" dg-chart-widget="">
+								<div id="fenbu3" style="width:100%;height:100%;"></div>
+								<script type="text/javascript">
+									var Chart04 = echarts.init(document.getElementById('fenbu3'));
+									option04 = {
+										xAxis: {
+											type: 'category',
+											data: ["总计人数","男生人数", "女生人数"],
+											axisLabel: {
+														show: true,
+														textStyle: {
+															color: '#fff'
+																	},
+														fontSize:15
+														},
+											offset: 0,
+											axisLine: {
+											  show: false
+											}
+										},
+										yAxis: {
+											type: 'value',
+											show:false
+										},
+										series: [
+											{
+												data: [120, 200, 150],
+												type: 'bar',
+												label: {
+											        show: true,
+											        position: "insideBottom",
+													fontSize:15,
+													offset: [0, 0]
+											      },
+												itemStyle: {
+												      color:'rgba(128, 128, 128, 0)'
+												    }
+											}
+										]
+									};
+									Chart04.setOption(option04);
+									</script>
+							</div>
+						</div>
+					</div>
+					<div class="layout layout-center-bottom">
+						<div class="panel no-title-bg">
+							<div class="title"><label></label></div>
+							<div class="chart" dg-chart-widget="">
+								<div id="fenbu2" style="width:100%;height:100%;"><!-地图-自定义--></div>
+								<script type="text/javascript">
+									var Chart03 = echarts.init(document.getElementById('fenbu2'));
+									var outname=['北京','天津','河北','山西','内蒙古','辽宁','吉林','黑龙江','上海','江苏','浙江','安徽','福建','江西','山东','河南','湖北','湖南','广东','广西','海南','重庆','四川','贵州','云南','西藏','陕西','甘肃','青海','宁夏','新疆','台湾','香港','澳门','南海诸岛'];
+									var outvalue = [23,45,33,178,4,55,7,4,33,57,23,45,35,34,24,34,67,56,45,34,32,33,33,99,67,46,47,47,36,56,43,578,55,23,0];
+									var outdata = [];
+									
+									var max = 6000,
+									    min = 10;
+									var maxSize4Pin = 100,
+									    minSize4Pin = 20;
+									
+									for (var i = 0; i < outname.length; i++) {
+									    outdata.push({
+									        name: outname[i],
+									        value: outvalue[i]
+									    })
+									}
+									
+									var geoCoordMap = {};
+									/*获取地图数据*/
+									var mapFeatures = echarts.getMap('china').geoJson.features;
+									//  console.log(mapFeatures)
+									mapFeatures.forEach(function(v) {
+									    console.info(v)
+									    // 地区名称
+									    var name = v.properties.name;
+									    // 地区经纬度
+									    geoCoordMap[name] = v.properties.cp;
+									
+									});
+									var convertData = function(outdata) {
+									    var res = [];
+									    for (var i = 0; i < outdata.length; i++) {
+									        var geoCoord = geoCoordMap[outdata[i].name];
+									        if (geoCoord) {
+									            res.push({
+									                name: outdata[i].name,
+									                value: geoCoord.concat(outdata[i].value),
+									            });
+									        }
+									    }
+									    return res;
+									};
+									
+									option03 = {
+									    backgroundColor: '#0F1C3C',
+									    tooltip: {
+									        show: true,
+									        formatter: function(params) {
+									            if (params.value.length > 1) {
+									                return '&nbsp;&nbsp;' + params.name + '&nbsp;&nbsp;&nbsp;' + params.value[2] + '人&nbsp;&nbsp;';
+									            } else {
+									                return '&nbsp;&nbsp;' + params.name + '&nbsp;&nbsp;&nbsp;' + params.value + '人&nbsp;&nbsp;';
+									            }
+									        },
+									
+									    },
+									
+									    geo: {
+									        map: 'china',
+									        show: true,
+									        roam: false,
+									        label: {
+									            emphasis: {
+									                show: false
+									            }
+									        },
+									        layoutSize: "100%",
+									        itemStyle: {
+									            normal: {
+									                borderColor: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+									                    offset: 0,
+									                    color: '#00F6FF'
+									                }, {
+									                    offset: 1,
+									                    color: '#53D9FF'
+									                }], false),
+									                borderWidth: 3,
+									                shadowColor: 'rgba(10,76,139,1)',
+									                shadowOffsetY: 0,
+									                shadowBlur: 60
+									            }
+									        }
+									    },
+									    series: [{
+									        type: 'map',
+									        map: 'china',
+									        aspectScale: 0.75,
+									        //zoom:1.1,
+									        label: {
+									            normal: {
+									                show: false,
+									            },
+									            emphasis: {
+									                show: false,
+									            }
+									        },
+									        itemStyle: {
+									            normal: {
+									                areaColor: {
+									                    x: 0,
+									                    y: 0,
+									                    x2: 0,
+									                    y2: 1,
+									                    colorStops: [{
+									                        offset: 0,
+									                        color: '#073684' // 0% 处的颜色
+									                    }, {
+									                        offset: 1,
+									                        color: '#061E3D' // 100% 处的颜色
+									                    }],
+									                },
+									                borderColor: '#215495',
+									                borderWidth: 1,
+									            },
+									            emphasis: {
+									                areaColor: {
+									
+									                    x: 0,
+									                    y: 0,
+									                    x2: 0,
+									                    y2: 1,
+									                    colorStops: [{
+									                        offset: 0,
+									                        color: '#073684' // 0% 处的颜色
+									                    }, {
+									                        offset: 1,
+									                        color: '#061E3D' // 100% 处的颜色
+									                    }],
+									                },
+									            }
+									        },
+									        data: outdata,
+									    }, {
+									        type: 'effectScatter',
+									        coordinateSystem: 'geo',
+									        rippleEffect: {
+									            brushType: 'stroke'
+									        },
+									        showEffectOn: 'render',
+									        itemStyle: {
+									            normal: {
+									                color: {
+									                    type: 'radial',
+									                    x: 0.5,
+									                    y: 0.5,
+									                    r: 0.5,
+									                    colorStops: [{
+									                        offset: 0,
+									                        color: 'rgba(5,80,151,0.2)'
+									                    }, {
+									                        offset: 0.8,
+									                        color: 'rgba(5,80,151,0.8)'
+									                    }, {
+									                        offset: 1,
+									                        color: 'rgba(0,108,255,0.7)'
+									                    }],
+									                    global: false // 缺省为 false
+									                },
+									            }
+									
+									        },
+									        label: {
+									            normal: {
+									                show: true,
+									                color: '#fff',
+									                fontWeight: 'bold',
+									                position: 'inside',
+									                formatter: function(para) {
+									                    return '{cnNum|' + para.data.value[2] + '}'
+									                },
+									                rich: {
+									                    cnNum: {
+									                        fontSize: 13,
+									                        color: '#D4EEFF',
+									                    }
+									                }
+									            },
+									        },
+									        symbol: 'circle',
+									        symbolSize: function(val) {
+									            if (val[2] === 0) {
+									                return 0;
+									            }
+									            var a = (maxSize4Pin - minSize4Pin) / (max - min);
+									            var b = maxSize4Pin - a * max;
+									            return a * val[2] + b * 1.2;
+									        },
+									        data: convertData(outdata),
+									        zlevel: 1,
+									    }]
+									};
+									Chart03.setOption(option03);
+								</script>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="layout layout-right-top">
+				<div class="panel">
+					<div class="title"><label>专业人数</label></div>
+					<div class="chart" dg-chart-widget="">
+						<div id="fenbu4" style="width:100%;height:100%;"><!--自定义--></div>
+						<script type="text/javascript">
+							var Chart05 = echarts.init(document.getElementById('fenbu4'));
+							var option05 = {
+							  xAxis: {
+							    type: 'category',
+								axisLabel:{
+									color:'white'
+								},
+							    data: ['计科','信安','物联网','软工'],
+								splitLine: {
+								      show: false
+								    }
+							  },
+							  yAxis: {
+							    type: 'value',
+								axisLabel:{
+									color:'white'
+								},
+								splitLine: {
+								      show: false
+								    }
+							  },
+							  series: [
+							    {
+							      data: [100,40,50,90],
+							      type: 'bar',
+								  colorBy: "series",
+								  color:'blue',
+								  label: {
+								        show: true,
+								        position: "top",
+										color:'white'
+								      }
+							    }
+							  ]
+							};
+							Chart05.setOption(option05);
+						</script>
+					</div>
+				</div>
+			</div>
+			<div class="layout layout-right-center">
+				<div class="panel">
+					<div class="title"><label>报道人数占比</label></div>
+					<div class="chart" dg-chart-widget="">
+						<div id="fenbu6" style="width:100%;height:100%;"><!--自定义--></div>
+						<script type="text/javascript">
+							var Chart06 = echarts.init(document.getElementById('fenbu6'));
+						var getvalue=[88];
+						var studentNum=100;
+						
+						var option06 = {
+						    title: {
+								text: getvalue+'%',
+								textStyle: {
+								  color: '#28BCFE',
+								  fontSize: 25
+								},
+								itemGap: 20,
+								left: 'center',
+								top: 'center'
+							},
+						    tooltip: {
+						        formatter: function (params) {
+						            return '<span style="color: #fff;">人数占比：'+ getvalue + '%</span>';
+						        }
+						    },
+						  angleAxis: {
+						    max: 100,
+						    clockwise: true, // 逆时针
+						    // 隐藏刻度线
+						    show: false
+						  },
+						  radiusAxis: {
+						        type: 'category',
+						        show: true,
+						        axisLabel: {
+						            show: false,
+						        },
+						        axisLine: {
+						            show: false,
+						
+						        },
+						        axisTick: {
+						            show: false
+						        },
+						  },
+						  polar: {
+						    center: ['50%', '50%'],
+						    radius: '100%' //图形大小
+						  },
+						  series: [{
+						    type: 'bar',
+						    data: getvalue,
+							showBackground: true,
+							backgroundStyle: {
+								color: '#BDEBFF',
+							},
+						    coordinateSystem: 'polar',
+						    roundCap: true,
+						    barWidth: 30,
+						    itemStyle: {
+						        normal: {
+						        opacity: 1,
+						        color:  new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+						            offset: 0,
+						            color: '#25BFFF'
+						          }, {
+						            offset: 1,
+						            color: '#5284DE'
+						          }]),
+						        shadowBlur: 5,
+						        shadowColor: '#2A95F9',
+						    }
+						    },
+						  }]
+						};
+						Chart06.setOption(option06);
+						</script>
+						</div>
+				</div>
+			</div>
+			<div class="layout layout-right-bottom">
+				<div class="panel">
+					<div class="title"><label>学生行为习惯分析</label></div>
+					<div class="chart" dg-chart-widget="">
+						<div id="fenbu8" style="width:100%;height:100%;"></div>
+						<script type="text/javascript">
+							var Chart08 = echarts.init(document.getElementById('fenbu8'));
+							option08 = {
+							   backgroundColor: '#0A2E5D',
+							    "normal": {
+							        "top": 200,
+							        "left": 300,
+							        "width": 500,
+							        "height": 400,
+							        "zIndex": 6,
+							        "backgroundColor": ""
+											},
+							    "color": ["rgba(245, 166, 35, 1)", "rgba(19, 173, 255, 1)"],
+							    "title": {
+							        "show": true,
+							        "text": "",
+							        "left": "40%",
+							        "top": "1%",
+							        "textStyle": {
+							            "fontSize": 8,
+							            "color": "#fff",
+							            "fontStyle": "normal",
+							            "fontWeight": "normal"
+							        }
+							    },
+							    "tooltip": {
+							        "show": true,
+							        "trigger": "item"
+							    },
+							    "legend": {
+							        "show": true,
+									padding:[0,-50,0,0],
+							        "icon": "circle",
+							        "left": "5%",
+							        "top": "90%",
+							        "orient": "horizontal",
+							        "textStyle": {
+							            "fontSize": 7,
+							            "color": "#fff"
+							        },
+							        "data": ["高一(1)班", "高一(2)班"]
+							    },
+							    "radar": {
+							        "center": ["50%", "50%"],
+							        "radius": "70%",
+							        "startAngle": 90,
+							        "splitNumber": 4,
+							        "shape": "circle",
+							        "splitArea": {
+							            "areaStyle": {
+							                "color": ["transparent"]
+							            }
+							        },
+							        "axisLabel": {
+							            "show": false,
+							            "fontSize": 8,
+							            "color": "#fff",
+							            "fontStyle": "normal",
+							            "fontWeight": "normal"
+							        },
+							        "axisLine": {
+							            "show": true,
+							            "lineStyle": {
+							                "color": "white"//
+							            }
+							        },
+							        "splitLine": {
+							            "show": true,
+							            "lineStyle": {
+							                "color": "white"//
+							            }
+							        },
+							        "indicator": [{
+							            "name": "良好的文明礼仪习惯",
+							            "max": 88
+							        }, {
+							            "name": "良好的学习习惯",
+							            "max": 88
+							        }, {
+							            "name": "良好的健体习惯",
+							            "max": 88
+							        }, {
+							            "name": "良好的卫生习惯",
+							            "max": 88
+							        }, {
+							            "name": "良好的阅读习惯",
+							            "max": 88
+							        }, {
+							            "name": "良好的劳动习惯",
+							            "max": 88
+							        }, {
+							            "name": "良好的生活习惯",
+							            "max": 88
+							        }, {
+							            "name": "良好的安全习惯",
+							            "max": 88
+							        }]
+							    },
+							    "series": [{
+							        "name": "高一(1)班",
+							        "type": "radar",
+							        "symbol": "circle",
+							        "symbolSize": 5,
+							        "areaStyle": {
+							            "normal": {
+							                "color": "rgba(245, 166, 35, 0.4)"
+							            }
+							        },
+							        itemStyle:{
+							            color:'rgba(245, 166, 35, 1)',
+							            borderColor:'rgba(245, 166, 35, 0.3)',
+							            borderWidth:10,
+							        },
+							        "lineStyle": {
+							            "normal": {
+							                "type": "dashed",
+							                
+							                "color": "rgba(245, 166, 35, 1)",
+							                "width": 2
+							            }
+							        },
+							        "data": [
+							            [80, 50, 55, 80, 50, 80, 48, 43]
+							        ]
+							    }, {
+							        "name": "高一(2)班",
+							        "type": "radar",
+							        "symbol": "circle",
+							        "symbolSize": 5,
+							        "itemStyle": {
+							            "normal": {
+							                color:'rgba(19, 173, 255, 1)',
+							                "borderColor": "rgba(19, 173, 255, 0.4)",
+							                "borderWidth": 10
+							            }
+							        },
+							        "areaStyle": {
+							            "normal": {
+							                "color": "rgba(19, 173, 255, 0.5)"
+							            }
+							        },
+							        "lineStyle": {
+							            "normal": {
+							                "color": "rgba(19, 173, 255, 1)",
+							                "width": 2,
+							                "type": "dashed"
+							            }
+							        },
+							        "data": [
+							            [60, 60, 65, 60, 70, 40, 80, 63]
+							        ]
+							    }]
+							};
+							Chart08.setOption(option08);
+							</script>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="app">
+			
+		</div>
+		<script>
+			var app = new Vue({
+			el : '#app',
+			data() {
+        	return{
+        		timer:null
+        	}
+        	},
+			// 在 `methods` 对象中定义方法
+			methods : {
+				//每隔一段时间调用
+				greet : function() {
+					axios
+			      .get('getSexNum')
+			      .then(function (response){
+					//修改男女人数及总人数
+					let sexArr=response.data;
+					option04.series[0].data=[sexArr[0]+sexArr[1],sexArr[0],sexArr[1]];
+					Chart04.setOption(option04);
+					//修改男女占总人数的比例
+					let menPercent=Math.round(sexArr[0]*100/(sexArr[0]+sexArr[1]));
+					option.series[0].data[0].value=menPercent;
+					option.series[0].data[1].value=100-menPercent;
+					Chart.setOption(option);
+					//修改报道人数占比
+					getvalue=[Math.round((sexArr[0]+sexArr[1])*100/studentNum)];
+					option06.title.text=getvalue+"%";
+					option06.series[0].data=getvalue;
+					option06.tooltip={
+						formatter: function (params) {
+							return '<span style="color: #fff;">人数占比：'+ getvalue + '%</span>';
+						}
+					}
+					Chart06.setOption(option06);
+			      }
+			  		)
+			      .catch(function (error) { // 请求失败处理
+			        console.log(error);
+			      });
+
+				  //修改各专业人数
+				  axios
+			      .get('getMajorNum')
+			      .then(function (response){
+					option05.series[0].data=response.data;
+					Chart05.setOption(option05);
+			      }
+			  		)
+			      .catch(function (error) { // 请求失败处理
+			        console.log(error);
+			      });
+
+				  //修改各省份人数
+				  axios
+			      .get('getProvinceNum')
+			      .then(function (response){
+					outvalue=response.data.concat([0]);
+					outdata=[];
+					for (var i = 0; i < outname.length; i++) {
+						outdata.push({
+							name: outname[i],
+							value: outvalue[i]
+						})
+					}
+					option03.series[0].data=outdata;
+					option03.series[1].data=convertData(outdata);
+					Chart03.setOption(option03);
+			      }
+			  		)
+			      .catch(function (error) { // 请求失败处理
+			        console.log(error);
+			      });
+
+				  //修改各年龄段人数
+				  axios
+			      .get('getAgeNum')
+			      .then(function (response){
+					option02.series[0].data[0].value=response.data[0];
+					option02.series[0].data[1].value=response.data[1];
+					option02.series[0].data[2].value=response.data[2];
+					option02.series[0].data[3].value=response.data[3];
+					option02.series[0].data[4].value=response.data[4];
+					Chart02.setOption(option02);
+			      }
+			  		)
+			      .catch(function (error) { // 请求失败处理
+			        console.log(error);
+			      });
+
+				}
+			},
+
+			//定时刷新
+			mounted() {
+        	this.greet();
+        	this.timer = setInterval(() => {
+          	setInterval(this.greet(), 0);
+        	}, 3000);
+			},
+			beforeDestroy() {
+				clearInterval(this.timer);
+				this.timer = null;
+			}
+			})
+		</script>
+	</body>
+</html>
