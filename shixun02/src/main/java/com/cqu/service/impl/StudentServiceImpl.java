@@ -10,6 +10,7 @@ import com.cqu.service.StudentService;
  * 服务层的实现类
  *
  */
+
 @Service
 public class StudentServiceImpl implements StudentService {
 	
@@ -54,11 +55,16 @@ public class StudentServiceImpl implements StudentService {
 
 	
 	//向数据库加入学生
+	//首先通过mapper的findStudentByNumber来获取该学号的Student对象
+	//若数据库中已有该学号的学生，则student2即为获取的学生对象；若无，则student2为null
+	//然后通过条件语句判断：
+	//若student2为null，则说明数据库中无该学号学生，使用addStudent向数据库中加入insertStudent方法的输入对象student并返回null
+	//若student2不为空，则说明数据库中有该学号学生，直接返回insertStudent方法的输入对象student
 	@Override
 	public Student insertStudent(Student student) {
 		Student student2 = mapper.findStudentByNumber(student.getNumber());
 		if(student2 == null) {
-			mapper.addStudentWithMapper(student);
+			mapper.addStudent(student);
 			return null;
 		}else {
 			return student;

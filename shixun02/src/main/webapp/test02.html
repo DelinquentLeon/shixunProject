@@ -23,7 +23,7 @@
 		dg-chart-options="{title:{show:false},legend:{top:0},grid:{top:25}}"
 		dg-chart-theme="{color:'#F0F0F0',actualBackgroundColor:'#142233'}">
 		<div class="head">
-			<div class="title"><label style="color: white;">重庆大学计算机学院报到新生情况</label></div>
+			<div class="title"><label>DataGear看板</label></div>
 		</div>
 		<div class="content">
 			<div class="layout layout-left-top">
@@ -79,7 +79,9 @@
 						                            }]
 						                        };
 						                        var option = {
-						                            
+						                            tooltip: {
+						                                show: false, //鼠标放上去显示悬浮数据
+						                            },
 						                            grid: {
 						                                // left: '20%',
 						                                // right: '20%',
@@ -134,13 +136,13 @@
 						                            tooltip: {
 						                                show: true,
 						                                trigger: 'axis',
-						                                formatter: '{b}:{c}%',
+						                                formatter: '{a}<br>{b}:{c}%',
 						                                textStyle: {
 						                                    color: '#ffffff',
 						                                    fontSize: '15'
 						                                },
 						                                axisPointer: {
-						                                    type: 'none',
+						                                    type: 'shadow',
 						                                }
 						                            },
 						                            series: [
@@ -158,10 +160,7 @@
 						                                            itemStyle: {
 						                                                normal: {
 						                                                    color: 'rgba(105,204,230)' //单独控制颜色
-						                                                },
-																		emphasis: {
-																		    color: 'rgba(105,204,230)' //单独控制颜色
-																		}
+						                                                }
 						                                            }
 						                                        },
 						                                        {
@@ -220,7 +219,7 @@
 			</div>
 			<div class="layout layout-left-center">
 				<div class="panel">
-					<div class="title"><label>排名统计</label></div>
+					<div class="title"><label>标题</label></div>
 					<div class="chart" dg-chart-widget="">
 						<div id="fenbu7" style="width:100%;height:100%;"></div>
 						<script type="text/javascript">
@@ -313,33 +312,26 @@
 							  let anti_crash_count = 0;
 							  while (circles.length < maxLength) {
 							    let circle = {
-							      x: getRandomNumber(radius, max_x - radius),
+							      x: getRandomNumber(radius*2, max_x - radius*2),
 							      y: getRandomNumber(radius, max_y - radius),
 							      radius,
 							    };
 							
 							    let isOverlapping = false;
-							    let num = 0;
 							
 							    for (let j = 0; j < circles.length; j++) {
 							      let previous_circle = circles[j];
 							      let distance = Math.hypot(circle.x - previous_circle.x, circle.y - previous_circle.y);
 							
-							      while (distance < circle.radius + previous_circle.radius) {
-							          let circle = {
-							            x: getRandomNumber(radius, max_x - radius),
-							            y: getRandomNumber(radius, max_y - radius),
-							            radius,
-							          };
-									  num++;
-									  if(num>100) break;
-									  
+							      if (distance < circle.radius + previous_circle.radius) {
+							        isOverlapping = true;
+							        break;
 							      }
 							    }
-								circles.push(circle);
-							    // if (!isOverlapping) {
-							    //   circles.push(circle);
-							    // }
+							
+							    if (!isOverlapping) {
+							      circles.push(circle);
+							    }
 							    anti_crash_count++;
 							    if (anti_crash_count > 10000) {
 							      break;
@@ -500,7 +492,12 @@
 						<div class="panel no-title-bg">
 							<div class="title"><label>男女人数</label></div>
 							<div class="chart" dg-chart-widget="">
-								<div id="fenbu3" style="width:100%;height:100%;"></div>
+								<!-- <div class="row">
+									<div class="col-sm-4">.col-sm-3</div>
+									<div class="col-sm-4">.col-sm-3</div>
+									<div class="col-sm-4">.col-sm-3</div>
+								</div> -->
+								<div id="fenbu3" style="width:100%;height:150%;"></div>
 								<script type="text/javascript">
 									var Chart04 = echarts.init(document.getElementById('fenbu3'));
 									option04 = {
@@ -514,7 +511,7 @@
 																	},
 														fontSize:15
 														},
-											offset: 0,
+											offset: -120,
 											axisLine: {
 											  show: false
 											}
@@ -531,7 +528,7 @@
 											        show: true,
 											        position: "insideBottom",
 													fontSize:15,
-													offset: [0, 0]
+													offset: [0, -120]
 											      },
 												itemStyle: {
 												      color:'rgba(128, 128, 128, 0)'
@@ -548,12 +545,14 @@
 						<div class="panel no-title-bg">
 							<div class="title"><label></label></div>
 							<div class="chart" dg-chart-widget="">
-								<div id="fenbu2" style="width:100%;height:100%;"><!-地图-自定义--></div>
+								<div id="fenbu2" style="width:100%;height:100%;"><!--地图-自定义--></div>
 								<script type="text/javascript">
 									var Chart03 = echarts.init(document.getElementById('fenbu2'));
+									// var outname = ["南海诸岛", '北京', '天津', '上海', '重庆', '河北', '河南', '云南', '辽宁', '黑龙江', '湖南', '安徽', '山东', '新疆', '江苏', '浙江', '江西', '湖北', '广西', '甘肃', '山西', '内蒙古', '陕西', '吉林', '福建', '贵州', '广东', '青海', '西藏', '四川', '宁夏', '海南', '台湾', '香港', '澳门'];
+									// var outvalue = [0, 524, 13, 140, 75, 13, 83, 11, 19, 15, 69, 260, 39, 4, 31, 104, 36, 1052, 33, 347, 9, 157, 22, 4, 18, 5, 2398, 41, 0, 484, 404, 22, 3, 5, 225];
 									var outname=['北京','天津','河北','山西','内蒙古','辽宁','吉林','黑龙江','上海','江苏','浙江','安徽','福建','江西','山东','河南','湖北','湖南','广东','广西','海南','重庆','四川','贵州','云南','西藏','陕西','甘肃','青海','宁夏','新疆','台湾','香港','澳门','南海诸岛'];
 									var outvalue = [23,45,33,178,4,55,7,4,33,57,23,45,35,34,24,34,67,56,45,34,32,33,33,99,67,46,47,47,36,56,43,578,55,23,0];
-									var outdata = [];
+									var outdata=[];
 									
 									var max = 6000,
 									    min = 10;
@@ -801,23 +800,22 @@
 						<div id="fenbu6" style="width:100%;height:100%;"><!--自定义--></div>
 						<script type="text/javascript">
 							var Chart06 = echarts.init(document.getElementById('fenbu6'));
-						var getvalue=[88];
-						var studentNum=100;
+						var  getvalue=[88];
 						
 						var option06 = {
 						    title: {
-								text: getvalue+'%',
-								textStyle: {
-								  color: '#28BCFE',
-								  fontSize: 25
-								},
-								itemGap: 20,
-								left: 'center',
-								top: 'center'
+						    text: getvalue+'%',
+						    textStyle: {
+						      color: '#28BCFE',
+						      fontSize: 25
+						    },
+							itemGap: 20,
+						    left: 'center',
+						    top: 'center'
 							},
 						    tooltip: {
 						        formatter: function (params) {
-						            return '<span style="color: #fff;">人数占比：'+ getvalue + '%</span>';
+						            return '<span style="color: #fff;">综合得分：'+ getvalue + '分</span>';
 						        }
 						    },
 						  angleAxis: {
@@ -877,168 +875,12 @@
 			</div>
 			<div class="layout layout-right-bottom">
 				<div class="panel">
-					<div class="title"><label>学生行为习惯分析</label></div>
-					<div class="chart" dg-chart-widget="">
-						<div id="fenbu8" style="width:100%;height:100%;"></div>
-						<script type="text/javascript">
-							var Chart08 = echarts.init(document.getElementById('fenbu8'));
-							option08 = {
-							   backgroundColor: '#0A2E5D',
-							    "normal": {
-							        "top": 200,
-							        "left": 300,
-							        "width": 500,
-							        "height": 400,
-							        "zIndex": 6,
-							        "backgroundColor": ""
-											},
-							    "color": ["rgba(245, 166, 35, 1)", "rgba(19, 173, 255, 1)"],
-							    "title": {
-							        "show": true,
-							        "text": "",
-							        "left": "40%",
-							        "top": "1%",
-							        "textStyle": {
-							            "fontSize": 8,
-							            "color": "#fff",
-							            "fontStyle": "normal",
-							            "fontWeight": "normal"
-							        }
-							    },
-							    "tooltip": {
-							        "show": true,
-							        "trigger": "item"
-							    },
-							    "legend": {
-							        "show": true,
-									padding:[0,-50,0,0],
-							        "icon": "circle",
-							        "left": "5%",
-							        "top": "90%",
-							        "orient": "horizontal",
-							        "textStyle": {
-							            "fontSize": 7,
-							            "color": "#fff"
-							        },
-							        "data": ["高一(1)班", "高一(2)班"]
-							    },
-							    "radar": {
-							        "center": ["50%", "50%"],
-							        "radius": "70%",
-							        "startAngle": 90,
-							        "splitNumber": 4,
-							        "shape": "circle",
-							        "splitArea": {
-							            "areaStyle": {
-							                "color": ["transparent"]
-							            }
-							        },
-							        "axisLabel": {
-							            "show": false,
-							            "fontSize": 8,
-							            "color": "#fff",
-							            "fontStyle": "normal",
-							            "fontWeight": "normal"
-							        },
-							        "axisLine": {
-							            "show": true,
-							            "lineStyle": {
-							                "color": "white"//
-							            }
-							        },
-							        "splitLine": {
-							            "show": true,
-							            "lineStyle": {
-							                "color": "white"//
-							            }
-							        },
-							        "indicator": [{
-							            "name": "良好的文明礼仪习惯",
-							            "max": 88
-							        }, {
-							            "name": "良好的学习习惯",
-							            "max": 88
-							        }, {
-							            "name": "良好的健体习惯",
-							            "max": 88
-							        }, {
-							            "name": "良好的卫生习惯",
-							            "max": 88
-							        }, {
-							            "name": "良好的阅读习惯",
-							            "max": 88
-							        }, {
-							            "name": "良好的劳动习惯",
-							            "max": 88
-							        }, {
-							            "name": "良好的生活习惯",
-							            "max": 88
-							        }, {
-							            "name": "良好的安全习惯",
-							            "max": 88
-							        }]
-							    },
-							    "series": [{
-							        "name": "高一(1)班",
-							        "type": "radar",
-							        "symbol": "circle",
-							        "symbolSize": 5,
-							        "areaStyle": {
-							            "normal": {
-							                "color": "rgba(245, 166, 35, 0.4)"
-							            }
-							        },
-							        itemStyle:{
-							            color:'rgba(245, 166, 35, 1)',
-							            borderColor:'rgba(245, 166, 35, 0.3)',
-							            borderWidth:10,
-							        },
-							        "lineStyle": {
-							            "normal": {
-							                "type": "dashed",
-							                
-							                "color": "rgba(245, 166, 35, 1)",
-							                "width": 2
-							            }
-							        },
-							        "data": [
-							            [80, 50, 55, 80, 50, 80, 48, 43]
-							        ]
-							    }, {
-							        "name": "高一(2)班",
-							        "type": "radar",
-							        "symbol": "circle",
-							        "symbolSize": 5,
-							        "itemStyle": {
-							            "normal": {
-							                color:'rgba(19, 173, 255, 1)',
-							                "borderColor": "rgba(19, 173, 255, 0.4)",
-							                "borderWidth": 10
-							            }
-							        },
-							        "areaStyle": {
-							            "normal": {
-							                "color": "rgba(19, 173, 255, 0.5)"
-							            }
-							        },
-							        "lineStyle": {
-							            "normal": {
-							                "color": "rgba(19, 173, 255, 1)",
-							                "width": 2,
-							                "type": "dashed"
-							            }
-							        },
-							        "data": [
-							            [60, 60, 65, 60, 70, 40, 80, 63]
-							        ]
-							    }]
-							};
-							Chart08.setOption(option08);
-							</script>
-					</div>
+					<div class="title"><label>标题</label></div>
+					<div class="chart" dg-chart-widget=""></div>
 				</div>
 			</div>
 		</div>
+
 		<div id="app">
 			
 		</div>
@@ -1052,62 +894,37 @@
         	},
 			// 在 `methods` 对象中定义方法
 			methods : {
-				//每隔一段时间调用
 				greet : function() {
 					axios
 			      .get('getSexNum')
 			      .then(function (response){
-					//修改男女人数及总人数
 					let sexArr=response.data;
 					option04.series[0].data=[sexArr[0]+sexArr[1],sexArr[0],sexArr[1]];
 					Chart04.setOption(option04);
-					//修改男女占总人数的比例
 					let menPercent=Math.round(sexArr[0]*100/(sexArr[0]+sexArr[1]));
 					option.series[0].data[0].value=menPercent;
 					option.series[0].data[1].value=100-menPercent;
 					Chart.setOption(option);
-					//修改报道人数占比
-					getvalue=[Math.round((sexArr[0]+sexArr[1])*100/studentNum)];
-					option06.title.text=getvalue+"%";
-					option06.series[0].data=getvalue;
-					option06.tooltip={
-						formatter: function (params) {
-							return '<span style="color: #fff;">人数占比：'+ getvalue + '%</span>';
-						}
-					}
-					Chart06.setOption(option06);
 			      }
 			  		)
 			      .catch(function (error) { // 请求失败处理
 			        console.log(error);
 			      });
 
-				  //修改各专业人数
 				  axios
 			      .get('getMajorNum')
 			      .then(function (response){
 					option05.series[0].data=response.data;
-					Chart05.setOption(option05);
 			      }
 			  		)
 			      .catch(function (error) { // 请求失败处理
 			        console.log(error);
 			      });
 
-				  //修改各省份人数
 				  axios
 			      .get('getProvinceNum')
 			      .then(function (response){
 					outvalue=response.data.concat([0]);
-					outdata=[];
-					for (var i = 0; i < outname.length; i++) {
-						outdata.push({
-							name: outname[i],
-							value: outvalue[i]
-						})
-					}
-					option03.series[0].data=outdata;
-					option03.series[1].data=convertData(outdata);
 					Chart03.setOption(option03);
 			      }
 			  		)
@@ -1115,7 +932,6 @@
 			        console.log(error);
 			      });
 
-				  //修改各年龄段人数
 				  axios
 			      .get('getAgeNum')
 			      .then(function (response){

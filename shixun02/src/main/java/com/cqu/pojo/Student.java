@@ -1,7 +1,6 @@
 package com.cqu.pojo;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 
 @SuppressWarnings("serial")
 public class Student implements Serializable{
@@ -16,7 +15,9 @@ public class Student implements Serializable{
 	private String hobby;
 
 	
-	//alt shift s 导出自动生成的代码选择
+	//各种属性的get方法和set方法，
+	//其中Number和Age的set方法有两个，
+	//输入参数类型为int和String都可以设置int类型的属性
 	public int getNumber() {
 		return number;
 	}
@@ -67,6 +68,8 @@ public class Student implements Serializable{
 	public void setHobby(String hobby) {
 		this.hobby = hobby;
 	}
+	
+	//Student的两个带参数构造函数(第二个输入参数类型全为String)
 	public Student(int number, String name, String sex, String major, int age, String province, String hobby) {
 		super();
 		this.number = number;
@@ -77,9 +80,23 @@ public class Student implements Serializable{
 		this.province = province;
 		this.hobby = hobby;
 	}
+	public Student(String number, String name, String sex, String major, String age, String province, String hobby) {
+		super();
+		int number_int = Integer.parseInt(number);
+		this.number = number_int;
+		this.name = name;
+		this.sex = sex;
+		this.major = major;
+		int age_int = Integer.parseInt(age);
+		this.age = age_int;
+		this.province = province;
+		this.hobby = hobby;
+	}
 	public Student() {
 		super();
 	}
+	
+	//输出打印
 	@Override
 	public String toString() {
 		return "Student [number=" + number + ", name=" + name + ", sex=" + sex + ", major=" + major + ", age=" + age
