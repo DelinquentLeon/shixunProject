@@ -25,5 +25,6 @@ public interface StudentService {
 	int countHobbyNumber(String hobby);
 
 	//向数据库加入学生
+	//若数据库中有该学号学生，返回输入对象student；若无，返回null
 	Student insertStudent(Student student);
 }
