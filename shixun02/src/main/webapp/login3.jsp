@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" 
+pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -47,11 +47,11 @@
                 <div class="input-box">
                 	<input type="text" required placeholder="学号*" name="number"/>
 					<input type="text" required placeholder="姓名*" name="name"/>
-					<input type="text" required placeholder="性别*" name="sex"     list="sites"/>
-					<input type="text" required placeholder="年龄*" name="age"/>
+					<input type="text" required placeholder="性别*" name="sex" list="sites"/>
+					<input type="number" required placeholder="年龄*" name="age"/>
 					<input type="text" required placeholder="专业*" name="major"   list="major"/>
-					<input type="text" required placeholder="地址"  name="province"list="area"/>
-					<input type="text" required placeholder="爱好"  name="hobby"   list="hobby"/>
+					<input type="text" required placeholder="省份*"  name="province"list="area"/>
+					<input type="text" required placeholder="爱好*"  name="hobby"   list="hobby"/>
                 </div>
                 <!-- 按钮盒子 -->
                 <div class="btn-box">
