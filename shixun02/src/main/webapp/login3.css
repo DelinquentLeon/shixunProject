@@ -11,6 +11,10 @@ input {
     outline: none;
 }
 
+li {
+    list-style: none;
+}
+
 html,
 body {
     height: 100%;
@@ -154,16 +158,10 @@ span {
     height: 100%;
 }
 
-/* .info h2 {
-    font-size: 15px;
-    color :white;
-    font-weight: 400;
-    margin-top: 5px;
-    text-align: center;
-} */
 
 /* 标题盒子 */
 .title-box {
+    padding-top: 30px;
     height: 100px;
     line-height: 100px;
 
@@ -190,8 +188,9 @@ span {
 
 }
 
+
 /* 输入框 */
-input {
+.input-box input{
     width: 60%;
     height: 40px;
     margin-bottom: 20px;
@@ -202,6 +201,12 @@ input {
     /* 增加磨砂质感 */
     backdrop-filter: blur(10px);
 }
+
+.input-box #sites option {
+    font-size: 40px;
+    color: red;
+}
+
 
 input:focus {
     /* 光标颜色 */

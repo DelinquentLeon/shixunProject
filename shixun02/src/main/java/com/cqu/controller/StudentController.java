@@ -10,6 +10,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cqu.pojo.Student;
 import com.cqu.service.StudentService;
+/**
+ * spring mvc 的框架
+ * m:model
+ * v:view
+ * c:controller
+ * */
+
 
 @Controller
 public class StudentController {
@@ -19,22 +26,15 @@ public class StudentController {
 	
 	//提交，如果数据库里已有该学号则提交失败
 	@RequestMapping("login")
-	
+	//@ResponseBody
 	public String login(String number,String name,String sex,String age,
 			String major,String province,String hobby, Model model) {
-		Student student = new Student();
-		student.setNumber(number);
-		student.setName(name);
-		student.setSex(sex);
-		student.setMajor(major);
-		student.setAge(age);
-		student.setProvince(province);
-		student.setHobby(hobby);
-		System.out.println(student);
+		Student student = new Student(number,name,sex,major,age,province,hobby);
+		//insertStudent()方法:向数据库加入学生,若数据库中有该学号学生，返回输入对象student；若无，返回null
 		Student result_student = service.insertStudent(student);
-		String text;
+		String text;  //返还给登录页面的回馈信息
 		if (result_student!=null) {
-			//查到了改人,无效提交
+			//查到了该人,无效提交
 			System.out.println("已存在该学生");
 			text = "该学号已存在,提交失败";
 		}else {
@@ -97,7 +97,7 @@ public class StudentController {
 	@ResponseBody
 	public ArrayList<Integer> getProvinceNum(Model model){
 	    ArrayList<Integer> list = new ArrayList<>();
-	    String[] arr=new String[]{"北京","天津","河北省","山西省","内蒙古自治区","辽宁省","吉林省","黑龙江省","上海","江苏省",
+	    String[] arr={"北京","天津","河北省","山西省","内蒙古自治区","辽宁省","吉林省","黑龙江省","上海","江苏省",
 	    "浙江省","安徽省","福建省","江西省","山东省","河南省","湖北省","湖南省","广东省","广西壮族自治区","海南省",
 	    "重庆","四川省","贵州省","云南省","西藏自治区","陕西省","甘肃省","青海省","宁夏回族自治区",
 	    "新疆维吾尔自治区","台湾省","香港特别行政区","澳门特别行政区"};

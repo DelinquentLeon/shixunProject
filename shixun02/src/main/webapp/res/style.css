@@ -15,10 +15,9 @@
 	margin-top: -1rem;
 	margin-left: -1rem;
 }
-
 body{
 	color: #FFF;
-    background: url(images/bg.png);
+    /* background: url(images/bg.png); */
     margin: 0 0;
     padding: 0 0;
 }
@@ -40,6 +39,7 @@ body{
     padding-right: 18px;
 }
 .head .title{
+	color:#FFF;
 	font-size: 1.8rem;
 	text-align: center;
 	padding-top: 0.2em;
@@ -52,7 +52,31 @@ body{
 	right: 0;
 	bottom: 0;
 	left: 0;
+	/* background: linear-gradient(125deg,#2c3e50,#3cab6b,#2980b9,#f0867b,#8e44ad); */
+	background: linear-gradient(125deg,#2980b9,#f0867b,#8e44ad);
+	background-size: 500%;
+	/* animation: backgroundframe 15s infinite linear; */
 }
+/* @keyframes backgroundframe {
+	0%{
+		background-position: 0% 50%;
+	}
+	50%{
+		background-position: 100% 50%;
+	}
+	100%{
+		background-position: 0% 50%;
+	} */
+	/* 0%{
+		background-position: 0% 50%;
+	}
+	50%{
+		background-position: 0% 50%;
+	}
+	100%{
+		background-position: 0% 50%;
+	} */
+/* } */
 .layout{
 	position: absolute;
 	width: 25%;
@@ -89,7 +113,7 @@ body{
 	left: 0;
 	bottom: 0;
 	width: 18px;
-    background: url(images/line-img.png) top left repeat-y;;
+    /* background: url(images/line-img.png) top left repeat-y;; */
 }
 .layout-center::after{
 	content: "";
@@ -98,7 +122,7 @@ body{
 	right: 0;
 	bottom: 0;
 	width: 18px;
-    background: url(images/line-img.png) top left repeat-y;;
+    /* background: url(images/line-img.png) top left repeat-y;; */
 }
 .layout-center-main{
 	position: absolute;
@@ -145,7 +169,7 @@ body{
 	bottom: 0.3em;
 }
 .panel.panel-bg{
-    background: url(images/panel-bg.png);
+    /* background: url(images/panel-bg.png); */
     background-size: 100% 100%;
 } 
 .panel > .title{
@@ -157,9 +181,9 @@ body{
 	height: 1.8rem;
 	padding-left: 2rem;
 	font-size: 1rem;
-    text-align: left;
+    text-align: center;
     color: #fff;
-    background: url(images/title-bg.png);
+    /* background: url(images/title-bg.png); */
     background-size: 100% 100%;
 	box-sizing: border-box;
 	-moz-box-sizing: border-box;

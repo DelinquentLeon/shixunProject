@@ -5,7 +5,7 @@
 <mapper namespace="com.cqu.mapper.StudentMapper">
   
   	<!-- insert with mapper id与同名java的方法同名 -->
-  	<insert id="addStudentWithMapper" parameterType="com.cqu.pojo.Student">
+  	<insert id="addStudent" parameterType="com.cqu.pojo.Student">
   		insert into `student`(`number`,`name`,`sex`,`major`,`age`,`province`,`hobby`)
 	values (#{number},#{name},#{sex},#{major},#{age},#{province},#{hobby});
   	</insert>
@@ -27,31 +27,6 @@
 	<select id="findStudentByNumber" parameterType="int" resultType="com.cqu.pojo.Student">
 		select * from student where number=#{number};
 	</select>
-	
-	<!-- 查询某个学科的学生 -->
-	<!-- <select id="findAllStudentByProfession" parameterType="int" resultMap="allStudent_Profession">
-		select * from profession,student
-		where student.profession_id =profession.id and profession.id=#{profession_id};
-	</select> -->
-	
-	<!-- 手动映射结果集 -->
-	<!-- <resultMap type="project.pojo.Student" id="allStudent_Profession">
-		<id column="id" property="id"/>
-		<result column="username" property="username"/>
-		<result column="password" property="password"/>
-		<result column="sex" property="sex"/>
-		<result column="phone" property="phone"/>
-		<result column="profession_id" property="profession_id"/>
-		<result column="address" property="address"/>
-		<result column="date" property="date"/>
-		
-		<association property="profession" javaType="project/pojo/Profession.java">
-			<id column="profession_id" property="id"/>
-			<result column="pro_name" property="pro_name"/>
-		</association>
-	</resultMap>
-	 -->
-	 
 	 
 	<!-- 由性别查看学生数量 -->
 	<select id="countSexNumber" parameterType="string" resultType="int">
