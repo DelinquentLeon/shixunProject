@@ -72,8 +72,8 @@ span {
 
 /* 最外层的大盒子 */
 .box {
-    width: 1050px;
-    height: 600px;
+    width: 80%;
+    height: 90%;
     display: flex;
     /* 相对定位 */
     position: relative;
@@ -90,7 +90,7 @@ span {
 /* 滑动的盒子 */
 .pre-box {
     /* 宽度为大盒子的一半 */
-    width: calc(1050px / 2);
+    width: 50%;
     height: 100%;
     /* 绝对定位 */
     position: absolute;
@@ -193,6 +193,19 @@ span {
 .input-box input{
     width: 60%;
     height: 40px;
+    margin-bottom: 0px;
+    text-indent: 20px;
+    border: 1px solid #fff;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 120px;
+    /* 增加磨砂质感 */
+    backdrop-filter: blur(10px);
+}
+
+/* 选择 */
+.input-box select{
+    width: 60%;
+    height: 40px;
     margin-bottom: 20px;
     text-indent: 20px;
     border: 1px solid #fff;
@@ -260,3 +273,11 @@ button:hover {
     cursor: pointer;
     border-bottom: 1px solid white;
 }
+
+.studentInputP{
+    height: 5px;
+    font-size: 5px;
+    color: red;
+}
+
+select:invalid { color: rgb(119, 119, 119); }

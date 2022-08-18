@@ -1,122 +1,137 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 	<head>
-		<meta charset="utf-8">
-		<title>重庆大学欢迎你</title>
-		<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="./welcome.css" />
+		<script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+		<script src="https://cdn.bootcdn.net/ajax/libs/axios/0.27.2/axios.min.js"></script>
+		<title>欢迎界面</title>
 	</head>
-	<style>
-		body{
-			background-image:url('img/apple_l.jpg') ;
-			background-color: white;
-			/* background-size:contain; */
-			position: relative;
-		}
-		.welcome-backround{
-			/* background-image:url('img/welcome.jpg'); */
-			
-			width:100%;
-			height:300px;
-			/* background-color: white; */
-			
-			text-align: center;
-		}
-		.welcome-to{
-			
-			font: 12px/1 Tahoma,Helvetica,Arial,"\5b8b\4f53",sans-serif;
-			font-size: 50px;
-			color: #E6E6E6;
-			
-			text-align: center;
-			
-					}
-		.welcome{
-			
-			/* background-color:whitesmoke; */
-			background-color:#ccffff;
-			/* background-image: linear-gradient(#99ccff,#9999ff);/ */
-			/* filter:(10px) */
-			
-			
-			width:80%;
-			height:300px;
-			margin: auto auto;
-			border:1px solid white;
-			border-radius: 30px;
-			/* z-index: -1; */
-			box-shadow: 10px 10px 5px #888888;
-		}
-		.welcome-text{
-			display:block; 
-			       width:600px;
-			       height:20px; 
-				   /* filter:(2px) */
-
-			        
-			       /* color:mediumpurple; */
-				   /* overflow:hidden; */
-				   /* filter: blur(1px); */
-				   color:#3366ff; 
-			       line-height: 1.5em;
-			               font: 12px/1 Tahoma,Helvetica,Arial,"\5b8b\4f53",sans-serif;
-			       font-size: 29px;
-				   /* z-index: -1; */
-				   margin:auto auto;
-		}
-		.wel-to-cqu{
-			/* border: 1px solid black; */
-			height: 200px;
-			float: left;
-			margin: auto;
-		}
-		.xiaohui{
-			width:30%;
-			float: left;
-			/* border:1px solid black; */
-			
-		}
-		.space{
-			width: 100%;
-			height: 50px;
-		}
-	</style>
 	<body>
-		<div class="welcome-backround">
-			<div class = "xiaohui">
-				<img src="img/xiaohui.png" width="180" height="180">
-			</div>
-			<div class="wel-to-cqu">
-				<div class="space"> </div>
-				<p class="welcome-to"> 欢迎来到重庆大学</p>
-			</div>
-			
-			
+		<div class="container" id="app">
+			<section id="img-one" class="img">
+				<h1>H I !</h1>
+                <div id="idx">
+                    你是第<strong>{{num1}}</strong>个报道的新生<br><br>
+					有<strong>{{num2}}</strong>个已报道的新生和你同一个专业<br><br>
+					有<strong>{{num3}}</strong>个已报道的新生和你来自同一省份<br><br>
+					有<strong>{{num4}}</strong>个已报道的新生和你兴趣爱好相同
+                </div>
+			</section>
+			<section class="content-one">
+				<div class="text-box">
+					<div class="cnt">
+						<h2>重庆大学图书馆</h2>
+						<p>一栋红色建筑，深厚而优雅</p>
+						<br />
+						<p>
+							<a
+								target="_blank"
+								rel="noopener noreferrer"
+								href="https://baike.baidu.com/item/%E9%87%8D%E5%BA%86%E5%A4%A7%E5%AD%A6%E5%9B%BE%E4%B9%A6%E9%A6%86/2263385"
+								class="btn"
+							>
+								find <em>more</em>
+							</a>
+						</p>
+					</div>
+				</div>
+			</section>
+			<section class="content-two">
+				<div class="text-box">
+					<div class="cnt">
+						<h2>第一教学楼</h2>
+						<p>我们执笔奋斗的地方</p>
+						<br />
+						<p>
+							<a
+                                target="_blank"
+								rel="noopener noreferrer"
+								href="http://jjc.cqu.edu.cn/info/1020/1222.htm"
+								class="btn"
+								>find <em>more</em></a
+							>
+						</p>
+					</div>
+				</div>
+			</section>
+			<section class="content-three">
+				<div class="text-box">
+					<div class="cnt">
+						<h2>书屋</h2>
+						<p>属于我们的宁静</p>
+						<br />
+						<p>
+							<a
+                                target="_blank"
+								rel="noopener noreferrer"
+								href="http://huxi.cqu.edu.cn/page/2683791b75adf967"
+								class="btn"
+								>find <em>more</em></a
+							>
+						</p>
+					</div>
+				</div>
+			</section>
+			<section class="content-four">
+				<div class="text-box">
+					<div style="text-align: center" class="cnt">
+						<h2>What's past, is prologue</h2>
+						<p></p>
+						<br />
+						<p>
+							<a style="opacity: 0.8" href="show.html" class="btn"
+								>来看看同学们吧！</a
+							>
+						</p>
+					</div>
+				</div>
+			</section>
+			<!-- <section id="img-two" class="img">
+            <h6>What's past, is prologue</h6>
+            <br/>
+            <p>
+               <a href="#" class="btn">find <em>more</em></a> 
+            </p>
+            
+
+        </section> -->
 		</div>
-		<div class="welcome">
-			<span class="welcome-text">
-				
-				<i class="fa fa-arrow-circle-o-right" style="font-size:24px"></i>
-				你是第  <strong> 100</strong>个报道的新生
-				<i class="fa fa-pied-piper-alt" style="font-size:36px"></i>
-				
-				<br><br>
-				<i class="fa fa-arrow-circle-o-right" style="font-size:24px"></i>
-				有<strong> 100</strong>个已报道的新生和你同一个专业
-				<i class="fa fa-product-hunt" style="font-size:24px"></i>
-				
-				<br><br>
-				<i class="fa fa-arrow-circle-o-right" style="font-size:24px"></i>
-				有<strong> 100</strong>个已报道的新生和你来自同一省份
-				<i class="fa fa-hand-o-left" style="font-size:24px"></i>
-				
-				<br><br>
-				<i class="fa fa-arrow-circle-o-right" style="font-size:24px"></i>
-				有<strong> 100</strong>个已报道的新生和你兴趣爱好相同
-				<i class="fa fa-hand-grab-o" style="font-size:24px"></i>
-				<br>
-				<br>
-			</span>
-		</div>
-		
+
+		<script type="text/javascript">
+			var app = new Vue({
+				el : '#app',
+				data : {
+					name : 'Vue.js',
+					num1: 0,
+					num2: 0,
+					num3: 0,
+					num4: 0
+				},
+				// 在 `methods` 对象中定义方法
+				methods : {
+					greet : function() {
+						let self=this;
+						 axios
+					      .get('getSort')
+					      .then(function (response){
+				    		  self.num1=response.data[0];
+				    		  self.num2=response.data[1];
+				    		  self.num3=response.data[2];
+				    		  self.num4=response.data[3];
+					      }
+	
+					  		)
+					      .catch(function (error) { // 请求失败处理
+					        console.log(error);
+					      });
+					}
+				}
+			})
+			//用 JavaScript 直接调用方法
+			app.greet();
+		</script>
 	</body>
 </html>
