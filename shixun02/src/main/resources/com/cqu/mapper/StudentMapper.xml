@@ -52,5 +52,8 @@
 	<select id="countHobbyNumber" parameterType="string" resultType="int">
 		select count(*) from student where hobby=#{hobby};
 	</select>
-
+	
+	<select id = "getSort" resultType="int">
+		
+	</select>
 </mapper>

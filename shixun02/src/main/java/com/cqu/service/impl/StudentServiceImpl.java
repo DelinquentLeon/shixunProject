@@ -70,6 +70,11 @@ public class StudentServiceImpl implements StudentService {
 			return student;
 		}
 	}
+
+	@Override
+	public Student findStudentByNumber(int number) {
+		return mapper.findStudentByNumber(number);
+	}
 }
 
 

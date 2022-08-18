@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cqu.pojo.Student;
@@ -21,29 +22,39 @@ import com.cqu.service.StudentService;
 @Controller
 public class StudentController {
 	
+	private Student student_loginAndwelcome;
+	
 	@Autowired
 	StudentService service;
+	
+	//输入学号判断该学号是否已在数据库里
+	//返回类型：int   0不存在 1存在
+		@RequestMapping("numberExist")
+		@ResponseBody
+		public int numberExist(@RequestParam(value ="number")String number) {
+			//从数据库中通过学号number获取学生对象，若无，则result_student=null
+			int flagExist; //0不存在 1存在
+			Student result_student = service.findStudentByNumber(Integer.parseInt(number));
+			if (result_student!=null) {
+				//数据库中已有该学号
+				System.out.println("已存在该学生");
+				flagExist = 1;
+			}else {
+				//提交成功
+				System.out.println("成功插入数据库");
+				flagExist = 0;
+			}
+			return flagExist;
+		}
 	
 	//提交，如果数据库里已有该学号则提交失败
 	@RequestMapping("login")
 	//@ResponseBody
 	public String login(String number,String name,String sex,String age,
-			String major,String province,String hobby, Model model) {
-		Student student = new Student(number,name,sex,major,age,province,hobby);
-		//insertStudent()方法:向数据库加入学生,若数据库中有该学号学生，返回输入对象student；若无，返回null
-		Student result_student = service.insertStudent(student);
-		String text;  //返还给登录页面的回馈信息
-		if (result_student!=null) {
-			//查到了该人,无效提交
-			System.out.println("已存在该学生");
-			text = "该学号已存在,提交失败";
-		}else {
-			//提交成功
-			System.out.println("成功插入数据库");
-			text = "提交成功";
-		}
-		model.addAttribute("message",text);
-		return "login3.jsp";
+			String major,String province,String hobby) {
+		student_loginAndwelcome = new Student(number,name,sex,major,age,province,hobby);
+		service.insertStudent(student_loginAndwelcome);
+		return "welcome.html";
 	}
 	
 	//获取男女生人数list(顺序为:男 女)
@@ -57,6 +68,21 @@ public class StudentController {
 		list.add(women);
 		return list;
 	}
+	
+	//获取报到名次、同专业人数、同省份人数、同爱好人数
+		@RequestMapping("getSort")
+		@ResponseBody
+		public ArrayList<Integer> getSort() {
+			int men = service.countSexNumber("男");
+			int women = service.countSexNumber("女");
+			ArrayList<Integer> list = new ArrayList<>();
+			list.add(men+women);
+			
+			list.add(service.countMajorNumber(student_loginAndwelcome.getMajor())-1);
+			list.add(service.countProvinceNumber(student_loginAndwelcome.getProvince())-1);
+			list.add(service.countHobbyNumber(student_loginAndwelcome.getHobby())-1);
+			return list;
+		}
 	
 	//获取不同专业人数list(顺序为:计算机科学与技术 信息安全 物联网工程 软件工程)
 	@RequestMapping("getMajorNum")

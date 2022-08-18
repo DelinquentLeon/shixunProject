@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- 引入css文件 -->
+    <link rel="stylesheet" href="login.css" />
+    <!-- 引入jquery -->
+    <!-- 新 Bootstrap5 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/css/bootstrap.min.css">
+
+    <!--  popper.min.js 用于弹窗、提示、下拉菜单 -->
+    <script src="https://cdn.staticfile.org/popper.js/2.9.3/umd/popper.min.js"></script>
+
+    <!-- 最新的 Bootstrap5 核心 JavaScript 文件 -->
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/js/bootstrap.min.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.27.2/axios.min.js"></script>
+
+    <style>
+        .studentInputP{
+            font-size: 5px;
+            color: red;
+        }
+    </style>
+    <title>登录</title>
+</head>
+
+<body>
+    <!-- 最外层的大盒子 -->
+    <div class="box">
+        <!-- 滑动盒子 -->
+        <div class="pre-box">
+            <h1>WELCOME TO</h1>
+            <p style="font-size: 25px">CQU!</p>
+            <div class="img-box">
+                <img src="./img/cqu.png" alt="" />
+            </div>
+        </div>
+        <!-- 登录盒子 -->
+        <div class="login-form"></div>
+        <!-- 注册盒子 -->
+        <div class="register-form">
+            <!-- 标题盒子 -->
+            <div class="title-box">
+                <h1>JOIN US!</h1>
+            </div>
+            <!-- 输入框盒子 -->
+            <form action="login" id="studentForm">
+                <div class="input-box">
+                	<input type="text" required placeholder="学号*" name="number" id="studentNumberInput"/>
+                    <p class="studentInputP" id="studentNumberP"></p>
+					<input type="text" required placeholder="姓名*" name="name" id="studentNameInput"/>
+                    <p class="studentInputP" id="studentNameP"></p>
+					<input type="text" required placeholder="性别*" name="sex" id="studentSexInput" list="sites"/>
+					<input type="number" required placeholder="年龄*" name="age" id="studentAgeInput"/>
+                    <p class="studentInputP" id="studentAgeP"></p>
+					<input type="text" required placeholder="专业*" name="major"  id="studentMajorInput" list="major"/>
+					<input type="text" required placeholder="省份*"  name="province" id="studentProvinceInput" list="area"/>
+					<input type="text" required placeholder="爱好*"  name="hobby"  id="studentHobbyInput" list="hobby"/>
+                </div>
+                <!-- 按钮盒子 -->
+                <div class="btn-box">
+                    <button id="btn" type="button">提交</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 选项 -->
+    <datalist id="sites">
+        <option value="男">
+        <option value="女">
+    </datalist>
+    <datalist id="major">
+        <option value="计算机科学与技术">
+        <option value="信息安全">
+        <option value="物联网工程">
+        <option value="软件工程">
+    </datalist>
+    <datalist id="area">
+        <option value="北京">
+        <option value="天津">
+        <option value="河北省">
+        <option value="山西省">
+        <option value="内蒙古自治区">
+        <option value="辽宁省">
+        <option value="吉林省">
+        <option value="黑龙江省">
+        <option value="上海">
+        <option value="江苏省">
+        <option value="浙江省">
+        <option value="安徽省">
+        <option value="福建省">
+        <option value="江西省">
+        <option value="山东省">
+        <option value="河南省">
+        <option value="湖北省">
+        <option value="湖南省">
+        <option value="广东省">
+        <option value="广西壮族自治区">
+        <option value="海南省">
+        <option value="重庆">
+        <option value="四川省">
+        <option value="贵州省">
+        <option value="云南省">
+        <option value="西藏自治区">
+        <option value="陕西省">
+        <option value="甘肃省">
+        <option value="青海省">
+        <option value="宁夏回族自治区">
+        <option value="新疆维吾尔自治区">
+        <option value="台湾省">
+        <option value="香港特别行政区">
+        <option value="澳门特别行政区 ">
+    </datalist>
+    <datalist id="hobby">
+        <option value="运动类">
+        <option value="娱乐类">
+        <option value="社交类">
+        <option value="智力类">
+        <option value="收藏类">
+        <option value="乐器类">
+        <option value="文艺类">
+        <option value="其他类">
+    </datalist>
+
+    <script>
+        let numberFlag=true;
+        let nameFlag=true;
+        let sexFlag=true;
+        let ageFlag=true;
+        let majorFlag=true;
+        let provinceFlag=true;
+        let hobbyFlag=true;
+        $('#btn').click(function(){
+            if ($('#studentNumberInput').val().length==0){
+                numberFlag=false;
+            }
+            if ($('#studentNameInput').val().length==0){
+                nameFlag=false;
+            }
+            if ($('#studentSexInput').val().length==0){
+                sexFlag=false;
+            }
+            if ($('#studentAgeInput').val().length==0){
+                ageFlag=false;
+            }
+            if ($('#studentMajorInput').val().length==0){
+                majorFlag=false;
+            }
+            if ($('#studentProvinceInput').val().length==0){
+                provinceFlag=false;
+            }
+            if ($('#studentHobbyInput').val().length==0){
+                hobbyFlag=false;
+            }
+            if (numberFlag&&nameFlag&&sexFlag&&ageFlag&&majorFlag&&provinceFlag&&hobbyFlag){
+                let form = document.getElementById('studentForm');
+                form.submit();
+                alert('上传成功!');
+            }
+            else{
+                alert('上传失败,注意输入是否合法且完整!');
+            }
+        });
+
+        //对学号输入进行检查
+        $('#studentNumberInput').blur(function(){
+            let numberStr=$('#studentNumberInput').val();
+            if (numberStr.length>20){
+                $('#studentNumberP').html('输入长度不超过20!');
+                numberFlag=false;
+                return;
+            }
+            for (let i=0;i<numberStr.length;i++){
+                if (i==0&&numberStr[i]=='0'){
+                    $('#studentNumberP').html('学号不能以0开头!');
+                    numberFlag=false;
+                    return;
+                }
+                if (!(numberStr[i]>='0'&&numberStr[i]<='9')){
+                    $('#studentNumberP').html('学号只能由数字组成!');
+                    numberFlag=false;
+                    return;
+                }
+            }
+            axios({
+                method:'GET',
+                url:'numberExist',
+                params: {
+                    number: numberStr
+                }
+            }).then(response=>{
+                if (response.data==1){
+                    $('#studentNumberP').html('该学号已经提交！');
+                    numberFlag=false;
+                    return;
+                }
+            });
+
+            $('#studentNumberP').html('');
+            numberFlag=true;
+        });
+
+        //对姓名输入进行检查
+        $('#studentNameInput').blur(function(){
+            let nameStr=$('#studentNameInput').val();
+            if (nameStr.length>20){
+                $('#studentNameP').html('输入长度不超过20!');
+                nameFlag=false;
+                return;
+            }
+            for (let i=0;i<nameStr.length;i++){
+                if (!((nameStr[i].charCodeAt()>255)||(nameStr[i]>='a'&&nameStr[i]<='z')||(nameStr[i]>='A'&&nameStr[i]<='Z')||(nameStr[i]=='·'))){
+                    $('#studentNameP').html('输入只能由中英文字符和·组成!');
+                    nameFlag=false;
+                    return;
+                }
+            }
+            $('#studentNameP').html('');
+            nameFlag=true;
+        });
+
+        //对年龄输入进行检查
+        $('#studentAgeInput').blur(function(){
+            let age=parseInt($('#studentAgeInput').val());
+            if (age<0||age>120){
+                $('#studentAgeP').html('限制年龄范围:0~120');
+                ageFlag=false;
+            }
+            $('#studentNameP').html('');
+            ageFlag=true;
+        });
+    </script>
+</body>
+
+</html>
