@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- 引入css文件 -->
+    <link rel="stylesheet" href="login.css" />
+    <!-- 引入jquery -->
+    <!-- 新 Bootstrap5 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/css/bootstrap.min.css">
+
+    <!--  popper.min.js 用于弹窗、提示、下拉菜单 -->
+    <script src="https://cdn.staticfile.org/popper.js/2.9.3/umd/popper.min.js"></script>
+
+    <!-- 最新的 Bootstrap5 核心 JavaScript 文件 -->
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/js/bootstrap.min.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.27.2/axios.min.js"></script>
+
+    <title>登录</title>
+</head>
+
+<body>
+    <!-- 最外层的大盒子 -->
+    <div class="box">
+        <!-- 滑动盒子 -->
+        <div class="pre-box">
+            <h1>WELCOME TO</h1>
+            <p style="font-size: 25px">CQU!</p>
+            <div class="img-box">
+                <img src="./img/cqu.png" alt="" />
+            </div>
+        </div>
+        <!-- 登录盒子 -->
+        <div class="login-form"></div>
+        <!-- 注册盒子 -->
+        <div class="register-form">
+            <!-- 标题盒子 -->
+            <div class="title-box">
+                <h1>JOIN US!</h1>
+            </div>
+            <!-- 输入框盒子 -->
+            <form action="login" id="studentForm">
+                <div class="input-box">
+                	<input type="text" required placeholder="学号*" name="number" id="studentNumberInput"/>
+                    <p class="studentInputP" id="studentNumberP"></p>
+					<input type="text" required placeholder="姓名*" name="name" id="studentNameInput"/>
+                    <p class="studentInputP" id="studentNameP"></p>
+                    <select name="sex" id="studentSexInput" required>
+                        <option disabled value="" selected hidden>性别*</option>
+                        <option>男</option>
+                        <option>女</option>
+                    </select>
+					<input type="number" required placeholder="年龄*" name="age" id="studentAgeInput"/>
+                    <p class="studentInputP" id="studentAgeP"></p>
+                    <select required name="major" id="studentMajorInput">
+                        <option disabled value="" selected hidden>专业*</option>
+                        <option>计算机科学与技术</option>
+                        <option>信息安全</option>
+                        <option>物联网工程</option>
+                        <option>软件工程</option>
+                    </select>
+                    <select required name="province" id="studentProvinceInput">
+                        <option disabled value="" selected hidden>省份*</option>
+                        <option>北京</option>
+                        <option>天津</option>
+                        <option>河北省</option>
+                        <option>山西省</option>
+                        <option>内蒙古自治区</option>
+                        <option>辽宁省</option>
+                        <option>吉林省</option>
+                        <option>黑龙江省</option>
+                        <option>上海</option>
+                        <option>江苏省</option>
+                        <option>浙江省</option>
+                        <option>安徽省</option>
+                        <option>福建省</option>
+                        <option>江西省</option>
+                        <option>山东省</option>
+                        <option>河南省</option>
+                        <option>湖北省</option>
+                        <option>湖南省</option>
+                        <option>广东省</option>
+                        <option>广西壮族自治区</option>
+                        <option>海南省</option>
+                        <option>重庆</option>
+                        <option>四川省</option>
+                        <option>贵州省</option>
+                        <option>云南省</option>
+                        <option>西藏自治区</option>
+                        <option>陕西省</option>
+                        <option>甘肃省</option>
+                        <option>青海省</option>
+                        <option>宁夏回族自治区</option>
+                        <option>新疆维吾尔自治区</option>
+                        <option>台湾省</option>
+                        <option>香港特别行政区</option>
+                        <option>澳门特别行政区</option>
+                    </select>
+                    <select required name="hobby" id="studentHobbyInput">
+                        <option disabled value="" selected hidden>爱好</option>
+                        <option title="篮球、羽毛球、兵乓球等">运动类</option>
+                        <option title="听音乐、看电影、看书等">娱乐类</option>
+                        <option title="结交朋友、团建等">社交类</option>
+                        <option title="拼图、数独、魔方等">智力类</option>
+                        <option title="收藏扑克牌、鞋、邮票等">收藏类</option>
+                        <option title="弹吉他、钢琴、萨克斯等">乐器类</option>
+                        <option title="剪纸、品茶、涂鸦等">文艺类</option>
+                        <option>其他类</option>
+                    </select>
+                </div>
+                <!-- 按钮盒子 -->
+                <div class="btn-box">
+                    <button id="btn" type="button">提交</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let numberFlag=true;
+        let nameFlag=true;
+        let sexFlag=true;
+        let ageFlag=true;
+        let majorFlag=true;
+        let provinceFlag=true;
+        let hobbyFlag=true;
+        $('#btn').click(function(){
+            if ($('#studentNumberInput').val().length==0){
+                numberFlag=false;
+            }
+            if ($('#studentNameInput').val().length==0){
+                nameFlag=false;
+            }
+            if ($('#studentSexInput').val().length==0){
+                sexFlag=false;
+            }
+            if ($('#studentAgeInput').val().length==0){
+                ageFlag=false;
+            }
+            if ($('#studentMajorInput').val().length==0){
+                majorFlag=false;
+            }
+            if ($('#studentProvinceInput').val().length==0){
+                provinceFlag=false;
+            }
+            if ($('#studentHobbyInput').val().length==0){
+                hobbyFlag=false;
+            }
+            if (numberFlag&&nameFlag&&sexFlag&&ageFlag&&majorFlag&&provinceFlag&&hobbyFlag){
+                let form = document.getElementById('studentForm');
+                form.submit();
+                alert('上传成功!');
+            }
+            else{
+                alert('上传失败,注意输入是否合法且完整!');
+            }
+        });
+
+        //对学号输入进行检查
+        $('#studentNumberInput').blur(function(){
+            let numberStr=$('#studentNumberInput').val();
+            if (numberStr.length>20){
+                $('#studentNumberP').html('输入长度不超过20!');
+                numberFlag=false;
+                return;
+            }
+            for (let i=0;i<numberStr.length;i++){
+                if (i==0&&numberStr[i]=='0'){
+                    $('#studentNumberP').html('学号不能以0开头!');
+                    numberFlag=false;
+                    return;
+                }
+                if (!(numberStr[i]>='0'&&numberStr[i]<='9')){
+                    $('#studentNumberP').html('学号只能由数字组成!');
+                    numberFlag=false;
+                    return;
+                }
+            }
+            axios({
+                method:'GET',
+                url:'numberExist',
+                params: {
+                    number: numberStr
+                }
+            }).then(response=>{
+                if (response.data==1){
+                    $('#studentNumberP').html('该学号已经提交！');
+                    numberFlag=false;
+                    return;
+                }
+            });
+
+            $('#studentNumberP').html('');
+            numberFlag=true;
+        });
+
+        //对姓名输入进行检查
+        $('#studentNameInput').blur(function(){
+            let nameStr=$('#studentNameInput').val();
+            if (nameStr.length>40){
+                $('#studentNameP').html('输入长度不超过40!');
+                nameFlag=false;
+                return;
+            }
+            for (let i=0;i<nameStr.length;i++){
+                if (!((nameStr[i].charCodeAt()>255)||(nameStr[i]>='a'&&nameStr[i]<='z')||(nameStr[i]>='A'&&nameStr[i]<='Z')||(nameStr[i]=='·'))){
+                    $('#studentNameP').html('输入只能由中英文字符和·组成!');
+                    nameFlag=false;
+                    return;
+                }
+            }
+            $('#studentNameP').html('');
+            nameFlag=true;
+        });
+
+        //对年龄输入进行检查
+        $('#studentAgeInput').blur(function(){
+            let age=parseInt($('#studentAgeInput').val());
+            if (age<0||age>120){
+                $('#studentAgeP').html('限制年龄范围:0~120');
+                ageFlag=false;
+            }
+            $('#studentNameP').html('');
+            ageFlag=true;
+        });
+    </script>
+</body>
+
+</html>
