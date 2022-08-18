@@ -2,10 +2,13 @@ package com.cqu.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cqu.pojo.Student;
@@ -21,35 +24,59 @@ import com.cqu.service.StudentService;
 @Controller
 public class StudentController {
 	
+	private Student student;
+	
 	@Autowired
 	StudentService service;
+	
+	//输入学号判断该学号是否已在数据库里
+	//返回类型：int   0不存在 1存在
+		@RequestMapping("numberExist")
+		@ResponseBody
+		public int numberExist(String number) {
+			//从数据库中通过学号number获取学生对象，若无，则result_student=null
+			int flagExist; //0不存在 1存在
+			Student result_student = service.findStudentByNumber(Integer.parseInt(number));
+			if (result_student!=null) {
+				//数据库中已有该学号
+				System.out.println("已存在该学生");
+				flagExist = 1;
+			}else {
+				flagExist = 0;
+			}
+			return flagExist;
+		}
 	
 	//提交，如果数据库里已有该学号则提交失败
 	@RequestMapping("login")
 	//@ResponseBody
 	public String login(String number,String name,String sex,String age,
-			String major,String province,String hobby, Model model) {
-		Student student = new Student(number,name,sex,major,age,province,hobby);
-		//insertStudent()方法:向数据库加入学生,若数据库中有该学号学生，返回输入对象student；若无，返回null
-		Student result_student = service.insertStudent(student);
-		String text;  //返还给登录页面的回馈信息
-		if (result_student!=null) {
-			//查到了该人,无效提交
-			System.out.println("已存在该学生");
-			text = "该学号已存在,提交失败";
-		}else {
-			//提交成功
-			System.out.println("成功插入数据库");
-			text = "提交成功";
-		}
-		model.addAttribute("message",text);
-		return "login3.jsp";
+			String major,String province,String hobby,HttpSession session) {
+		student = new Student(number,name,sex,major,age,province,hobby);
+		service.insertStudent(student);
+		session.setAttribute("loginUser", name);
+		return "welcome.html";
+	}
+	
+	//获取报到名次、同专业人数、同省份人数、同爱好人数
+	@RequestMapping("getSort")
+	@ResponseBody
+	public ArrayList<Integer> getSort() {
+		int men = service.countSexNumber("男");
+		int women = service.countSexNumber("女");
+		ArrayList<Integer> list = new ArrayList<>();
+		list.add(men+women);
+		
+		list.add(service.countMajorNumber(student.getMajor())-1);
+		list.add(service.countProvinceNumber(student.getProvince())-1);
+		list.add(service.countHobbyNumber(student.getHobby())-1);
+		return list;
 	}
 	
 	//获取男女生人数list(顺序为:男 女)
 	@RequestMapping("getSexNum")
 	@ResponseBody
-	public ArrayList<Integer> getSexNum(Model model) {
+	public ArrayList<Integer> getSexNum() {
 		int men = service.countSexNumber("男");
 		int women = service.countSexNumber("女");
 		ArrayList<Integer> list = new ArrayList<>();
@@ -61,7 +88,7 @@ public class StudentController {
 	//获取不同专业人数list(顺序为:计算机科学与技术 信息安全 物联网工程 软件工程)
 	@RequestMapping("getMajorNum")
 	@ResponseBody
-	public ArrayList<Integer> getMajorNum(Model model) {
+	public ArrayList<Integer> getMajorNum() {
 		int jike = service.countMajorNumber("计算机科学与技术");
 		int xinan = service.countMajorNumber("信息安全");
 		int wulianwang = service.countMajorNumber("物联网工程");
@@ -77,7 +104,7 @@ public class StudentController {
 	//获取不同年龄段人数list(顺序为:15及以下 16-18 19-21 22-24 25及以上)
 	@RequestMapping("getAgeNum")
 	@ResponseBody
-	public ArrayList<Integer> getAgeNum(Model model) {
+	public ArrayList<Integer> getAgeNum() {
 		int age1 = service.countAgeNumber(0, 15);
 		int age2 = service.countAgeNumber(16, 18);
 		int age3 = service.countAgeNumber(19, 21);
@@ -95,7 +122,7 @@ public class StudentController {
 	//获取不同省份的学生人数list(顺序为:如下)
 	@RequestMapping("getProvinceNum")
 	@ResponseBody
-	public ArrayList<Integer> getProvinceNum(Model model){
+	public ArrayList<Integer> getProvinceNum(){
 	    ArrayList<Integer> list = new ArrayList<>();
 	    String[] arr={"北京","天津","河北省","山西省","内蒙古自治区","辽宁省","吉林省","黑龙江省","上海","江苏省",
 	    "浙江省","安徽省","福建省","江西省","山东省","河南省","湖北省","湖南省","广东省","广西壮族自治区","海南省",
@@ -110,7 +137,7 @@ public class StudentController {
 	//获取不同兴趣的学生人数list(顺序为:运动类 娱乐类 社交类 智力类 收藏类 乐器类 文艺类 其他类)
 	@RequestMapping("getHobbyNum")
 	@ResponseBody
-	public ArrayList<Integer> getHobbyNum(Model model) {
+	public ArrayList<Integer> getHobbyNum() {
 		int h1 = service.countHobbyNumber("运动类");
 		int h2 = service.countHobbyNumber("娱乐类");
 		int h3 = service.countHobbyNumber("社交类");

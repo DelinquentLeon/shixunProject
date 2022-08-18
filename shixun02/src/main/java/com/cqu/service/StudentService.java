@@ -24,7 +24,9 @@ public interface StudentService {
 	//由兴趣查看学生数量
 	int countHobbyNumber(String hobby);
 
+	//查询特定学号的学生
+	Student findStudentByNumber(int number);
+	
 	//向数据库加入学生
-	//若数据库中有该学号学生，返回输入对象student；若无，返回null
-	Student insertStudent(Student student);
+	void insertStudent(Student student);
 }
