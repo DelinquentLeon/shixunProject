@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- 引入css文件 -->
-    <link rel="stylesheet" href="login.css" />
+    <link rel="stylesheet" href="submit.css" />
     <!-- 引入jquery -->
     <!-- 新 Bootstrap5 核心 CSS 文件 -->
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/css/bootstrap.min.css">
@@ -20,7 +20,7 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.27.2/axios.min.js"></script>
 
-    <title>登录</title>
+    <title>提交信息</title>
 </head>
 
 <body>
@@ -43,7 +43,7 @@
                 <h1>JOIN US!</h1>
             </div>
             <!-- 输入框盒子 -->
-            <form action="login" id="studentForm">
+            <form action="submit" id="studentForm">
                 <div class="input-box">
                 	<input type="text" required placeholder="学号*" name="number" id="studentNumberInput"/>
                     <p class="studentInputP" id="studentNumberP"></p>
@@ -206,9 +206,10 @@
                 nameFlag=false;
                 return;
             }
+            let chineseSign=['~','·','！','@','#','￥','%','…','&','*','（','）','—','+','-','=','、','|','【','{','}','】','；','：','‘','“','，','《','。','》','/','？','*'];
             for (let i=0;i<nameStr.length;i++){
-                if (!((nameStr[i].charCodeAt()>255)||(nameStr[i]>='a'&&nameStr[i]<='z')||(nameStr[i]>='A'&&nameStr[i]<='Z')||(nameStr[i]=='·'))){
-                    $('#studentNameP').html('输入只能由中英文字符和·组成!');
+                if (!(((nameStr[i].charCodeAt()>255))||(nameStr[i]>='a'&&nameStr[i]<='z')||(nameStr[i]>='A'&&nameStr[i]<='Z')||(nameStr[i]=='·'))||chineseSign.includes(nameStr[i])){
+                    $('#studentNameP').html('输入只能由汉字和英文字母和·组成!');
                     nameFlag=false;
                     return;
                 }
@@ -219,12 +220,19 @@
 
         //对年龄输入进行检查
         $('#studentAgeInput').blur(function(){
-            let age=parseInt($('#studentAgeInput').val());
-            if (age<0||age>120){
-                $('#studentAgeP').html('限制年龄范围:0~120');
+            let ageStr=$('#studentAgeInput').val();
+            if (ageStr.indexOf('.')>=0){
+                $('#studentAgeP').html('年龄只能为整数!');
                 ageFlag=false;
+                return;
             }
-            $('#studentNameP').html('');
+            let age=parseInt(ageStr);
+            if (age<0||age>120){
+                $('#studentAgeP').html('限制年龄范围:0~120!');
+                ageFlag=false;
+                return;
+            }
+            $('#studentAgeP').html('');
             ageFlag=true;
         });
     </script>

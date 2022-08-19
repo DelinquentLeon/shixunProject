@@ -15,11 +15,11 @@ public class WelcomeInterceptor implements HandlerInterceptor {
      */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        Object loginUser = request.getSession().getAttribute("loginUser");
+        Object loginUser = request.getSession().getAttribute("submitUser");
         if (loginUser == null) {
             //未登录，返回登陆页
             request.setAttribute("msg", "请先填写表单！");
-            request.getRequestDispatcher("/login.html").forward(request, response);
+            request.getRequestDispatcher("/submit.html").forward(request, response);
             return false;
         } else {
             //放行

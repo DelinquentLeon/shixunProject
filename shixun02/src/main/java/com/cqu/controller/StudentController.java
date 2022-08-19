@@ -48,13 +48,13 @@ public class StudentController {
 		}
 	
 	//提交，如果数据库里已有该学号则提交失败
-	@RequestMapping("login")
+	@RequestMapping("submit")
 	//@ResponseBody
 	public String login(String number,String name,String sex,String age,
 			String major,String province,String hobby,HttpSession session) {
 		student = new Student(number,name,sex,major,age,province,hobby);
 		service.insertStudent(student);
-		session.setAttribute("loginUser", name);
+		session.setAttribute("submitUser", name);
 		return "welcome.html";
 	}
 	
